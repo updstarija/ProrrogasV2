@@ -1,0 +1,146 @@
+﻿:root {
+    --colorPrimario: #1A5276;
+    --colorSecundario: #2471A3;
+}
+
+#menuPrincipal {
+    background-color: var(--colorPrimario);
+}
+
+#subMenuPrincipal {
+    background-color: var(--colorPrimario);
+    color: #fff;
+}
+
+#subMenuPrincipal li:hover {
+    background-color: var(--colorSecundario);
+}
+
+.modal-franja {
+    height: 5px;
+    background-color: var(--colorPrimario);
+}
+
+.list-hover:hover {
+    color: #fff;
+    background-color: var(--colorSecundario);
+    cursor: pointer;
+}
+
+.datosPersona{
+    font-size:13px;
+}
+
+.btn-accion {
+    background-color: var(--colorSecundario);
+    color: #fff;
+}
+
+.btn-opcion-imprimir {
+    color: #5D6D7E;
+}
+
+.btn-opcion-extender {
+    color: #5DADE2;
+}
+
+.btn-opcion-inactivar {
+    color: #D35400;
+}
+
+.btn-opcion-eliminar {
+    color: #CD6155;
+}
+
+.btn-Ayuda {
+    background-color: #fff;
+    border: solid 1px #5499C7;
+    color: #5499C7;
+}
+
+.btn-Ayuda:hover {
+    background-color: #5499C7;
+    color: #fff;
+}
+
+
+.btn-flotante {
+    cursor: pointer;
+    font-size: 16px;
+    color: #ffffff;
+    border-radius: 100%;
+    background-color: var(--colorPrimario);
+    padding: 15px 20px;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    transition: all 300ms ease 0ms;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+}
+
+    .btn-flotante:hover {
+        background-color: var(--colorSecundario);
+        color: #ffffff;
+        box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+        transform: translateY(-7px);
+    }
+
+#sub-menu {
+    border-bottom: solid 2px #1F618D;
+}
+
+.sub-menu-prorroga{
+    width: 16.6%;
+    cursor: pointer;
+    color: #000;
+
+}
+
+.sub-menu-prorroga a{
+    color: #000;
+}
+
+.sub-menu-prorroga-activado {
+    background-color: #1F618D;
+    border:solid 1px #1F618D;
+}
+    .sub-menu-prorroga-activado a{
+        color: white;
+    }
+
+.btn-accion:hover {
+    background-color: var(--colorPrimario);
+    color: #fff;
+}
+
+
+.sub-menu-prorroga:hover {
+    background-color: #5499C7;
+    border: solid 1px #5499C7;
+}
+
+    .sub-menu-prorroga:hover a {
+        color: white;
+    }
+
+
+.sub-menu-reporte li:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--colorSecundario);
+}
+
+#cuerpoOferta {
+    width: 100%;
+    overflow: auto;
+}
+
+#cuerpoOfertaRegistro {
+    width: 100%;
+    overflow: auto;
+}
+
+
+
+

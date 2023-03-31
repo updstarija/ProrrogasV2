@@ -1,0 +1,487 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Reportes</h4>
+<div class="row mt-3">
+    <div class="col-sm-4">
+        <ul class="list-group sub-menu-reporte">
+            <li class="list-group-item" data-bs-toggle="modal" data-bs-target="#modalRepEstudiantesConDosProrrogas">
+                <a><i class="fas fa-file-contract"></i> Estudiantes con doble prórroga</a>
+            </li>
+            <li class="list-group-item" data-bs-toggle="modal" data-bs-target="#modalRepProrrogasPorModulo">
+                <a><i class="fas fa-file-contract"></i> Prórrogas por módulo</a>
+            </li>
+            <li class="list-group-item" data-bs-toggle="modal" data-bs-target="#modalRepProrrogasPorModuloPorGrupo">
+                <a><i class="fas fa-file-contract"></i> Prórrogas por módulo y grupo</a>
+            </li>
+            <li class="list-group-item" data-bs-toggle="modal" data-bs-target="#modalRepRegistrosPorModuloPorGrupo">
+                <a><i class="fas fa-file-contract"></i> Registros por módulo y grupo</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-8">
+        <div class="card mb-3" id="idGrafica" hidden="hidden">
+            <div class="card-body text-center" style="height:405px">
+                <h5 class="card-title text-primary">Cantidad de prórrogas activas por tipo</h5>
+                <canvas id="myChart" style="width:100%; height:355px"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Reporte de los estudiantes con doble prorroga -->
+<div class="modal fade" id="modalRepEstudiantesConDosProrrogas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"><i class="fas fa-file-contract"></i> Estudiantes con doble prórroga</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 mt-2">
+                        <label>Seleccione un módulo:</label>
+                        <select class="form-select" id="idModuloEstudiantesConDosProrrogas">
+                        </select>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <label>Extensión del reporte:</label>
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        <div class="form-check mx-5">
+                            <input class="form-check-input mt-2" type="radio" name="RepEstudianteDobleProrroga" value="PDF" checked>
+                            <label class="form-check-label">
+                                <span style="color: #F40F02; font-size:20px;"><i class="fas fa-file-pdf"></i></span> PDF
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        <div class="form-check mx-5">
+                            <input class="form-check-input mt-2" type="radio" name="RepEstudianteDobleProrroga" value="EXCEL">
+                            <label class="form-check-label">
+                                <span style="color: #1D6F42; font-size: 20px;"><i class="fas fa-file-excel"></i></span> Excel
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-accion" onclick="RepEstudiantesConDobleProrroga()" type="button">Generar reporte</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Reporte prorrogas por modulo -->
+<div class="modal fade" id="modalRepProrrogasPorModulo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"><i class="fas fa-file-contract"></i> Prórrogas registradas por módulo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 mt-2">
+                        <label>Seleccione un módulo:</label>
+                        <select class="form-select" id="idModuloProrrogasPorModulo">
+                        </select>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <label>Extensión del reporte:</label>
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        <div class="form-check mx-5">
+                            <input class="form-check-input mt-2" type="radio" name="RepProrrogasPorModulo" value="PDF" checked>
+                            <label class="form-check-label">
+                                <span style="color: #F40F02; font-size:20px;"><i class="fas fa-file-pdf"></i></span> PDF
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        <div class="form-check mx-5">
+                            <input class="form-check-input mt-2" type="radio" name="RepProrrogasPorModulo" value="EXCEL">
+                            <label class="form-check-label">
+                                <span style="color: #1D6F42; font-size: 20px;"><i class="fas fa-file-excel"></i></span> Excel
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-accion" onclick="RepProrrogasPorModulo()" type="button">Generar reporte</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Reporte prorrogas por modulo y grupo-->
+<div class="modal fade" id="modalRepProrrogasPorModuloPorGrupo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"><i class="fas fa-file-contract"></i> Prórrogas por módulo y grupo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 mt-2">
+                        <label>Seleccione un módulo:</label>
+                        <select class="form-select" id="idModuloProrrogasPorModuloPorGrupo">
+                        </select>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <label>Buscar grupo por materia:</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="idGrupoProrrogasPorModulo" hidden="hidden" />
+                            <input type="search" class="form-control" id="buscarMateriaPorModuloProrrogas" placeholder="Buscar por nombre" oninput="BuscarMateriaPorModuloProrrogas(this.value)">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </div>
+                        <div id="cuerpoOferta">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th width="8%">Grupo</th>
+                                        <th width="40%">Materia</th>
+                                        <th width="15%">Turno</th>
+                                        <th width="20%">Docente</th>
+                                        <th width="10%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ListaMateriasPorModuloProrrogas">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <label>Extensión del reporte:</label>
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        <div class="form-check mx-5">
+                            <input class="form-check-input mt-2" type="radio" name="RepProrrogasPorModuloPorGrupo" value="PDF" checked>
+                            <label class="form-check-label">
+                                <span style="color: #F40F02; font-size:20px;"><i class="fas fa-file-pdf"></i></span> PDF
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        <div class="form-check mx-5">
+                            <input class="form-check-input mt-2" type="radio" name="RepProrrogasPorModuloPorGrupo" value="EXCEL">
+                            <label class="form-check-label">
+                                <span style="color: #1D6F42; font-size: 20px;"><i class="fas fa-file-excel"></i></span> Excel
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-accion" onclick="RepProrrogasPorModuloPorGrupo()" type="button">Generar reporte</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Reporte de registros por modulo y grupo-->
+<div class="modal fade" id="modalRepRegistrosPorModuloPorGrupo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"><i class="fas fa-file-contract"></i> Registros por módulo y grupo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 mt-2">
+                        <label>Seleccione un módulo:</label>
+                        <select class="form-select" id="idModuloRegistrosPorModuloPorGrupo">
+                        </select>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <label>Buscar grupo por materia:</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="idGrupoRegistrosPorModulo" hidden="hidden" />
+                            <input type="search" class="form-control" id="buscarMateriaPorModuloRegistros" placeholder="Buscar por nombre" oninput="BuscarMateriaPorModuloRegistros(this.value)">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </div>
+                        <div id="cuerpoOfertaRegistro">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th width="8%">Grupo</th>
+                                        <th width="40%">Materia</th>
+                                        <th width="15%">Turno</th>
+                                        <th width="20%">Docente</th>
+                                        <th width="10%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ListaMateriasPorModuloRegistros">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <label>Extensión del reporte:</label>
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        <div class="form-check mx-5">
+                            <input class="form-check-input mt-2" type="radio" name="RepRegistrosPorModuloPorGrupo" value="PDF" checked>
+                            <label class="form-check-label">
+                                <span style="color: #F40F02; font-size:20px;"><i class="fas fa-file-pdf"></i></span> PDF
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        <div class="form-check mx-5">
+                            <input class="form-check-input mt-2" type="radio" name="RepRegistrosPorModuloPorGrupo" value="EXCEL">
+                            <label class="form-check-label">
+                                <span style="color: #1D6F42; font-size: 20px;"><i class="fas fa-file-excel"></i></span> Excel
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-accion" onclick="RepRegistrosPorModuloPorGrupo()" type="button">Generar reporte</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        Limpiar();
+        Estadisticas();
+    });
+
+    function Estadisticas() {
+        $.getJSON('@Url.Action("CantidadDeProrrogasPorTipo", "Reporte")', function (o) {
+            $("#idGrafica").prop("hidden", false);
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cantidad de prórrogas activas por tipo registradas en el modulo ' + o.modulo],
+                    datasets: [
+                        {
+                            label: o.nTipo1,
+                            data: [o.cTipo1],
+                            backgroundColor: [
+                                'rgba(127, 179, 213, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(127, 179, 213, 1)'
+                            ],
+                            borderWidth: 1
+                        },
+                        {
+                            label: o.nTipo2,
+                            data: [o.cTipo2],
+                            backgroundColor: [
+                                'rgba(118, 215, 196, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(118, 215, 196, 1)'
+                            ],
+                            borderWidth: 1
+                        },
+                        {
+                            label: o.nTipo3,
+                            data: [o.cTipo3],
+                            backgroundColor: [
+                                'rgba(195, 155, 211, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(195, 155, 211, 1)'
+                            ],
+                            borderWidth: 1
+                        },
+                        {
+                            label: o.nTipo4,
+                            data: [o.cTipo4],
+                            backgroundColor: [
+                                'rgba(241, 148, 138, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(241, 148, 138, 1)'
+                            ],
+                            borderWidth: 1
+                        },
+                        {
+                            label: o.nTipo5,
+                            data: [o.cTipo5],
+                            backgroundColor: [
+                                'rgba(178, 186, 187, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(178, 186, 187, 1)'
+                            ],
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    }
+
+    function CargarModulos() {
+        $.getJSON('@Url.Action("MostrarModulos", "Prorroga")', function (o) {
+            $("#idModuloEstudiantesConDosProrrogas").html("");
+            $("#idModuloProrrogasPorModulo").html("");
+            $("#idModuloProrrogasPorModuloPorGrupo").html("");
+            $("#idModuloRegistrosPorModuloPorGrupo").html("");
+            var option = "<option value='0' selected>Seleccionar</option>";
+            $("#idModuloEstudiantesConDosProrrogas").append(option);
+            $("#idModuloProrrogasPorModulo").append(option);
+            $("#idModuloProrrogasPorModuloPorGrupo").append(option);
+            $("#idModuloRegistrosPorModuloPorGrupo").append(option);
+            for (var i = 0; i < o.length; i++) {
+                option = "<option value='" + o[i].id + "'>" + o[i].nombre + "</option>";
+                $("#idModuloEstudiantesConDosProrrogas").append(option);
+                $("#idModuloProrrogasPorModulo").append(option);
+                $("#idModuloProrrogasPorModuloPorGrupo").append(option);
+                $("#idModuloRegistrosPorModuloPorGrupo").append(option);
+            }
+        });
+    }
+
+    function Limpiar() {
+        CargarModulos();
+        $("#idGrupoProrrogasPorModulo").val(0)
+        $("#idGrupoRegistrosPorModulo").val(0);
+        $("#buscarMateriaPorModuloProrrogas").val("");
+        $("#ListaMateriasPorModuloProrrogas").html("");
+        $("#buscarMateriaPorModuloRegistros").val("");
+        $("#ListaMateriasPorModuloRegistros").html("");
+        $('#cuerpoOferta').css('height', '80px');
+        $('#cuerpoOfertaRegistro').css('height', '80px');
+    }
+
+    function BuscarMateriaPorModuloProrrogas(nombre) {
+        if ($("#idModuloProrrogasPorModuloPorGrupo").val() == 0) {
+            return Toast('warning', 'Debe seleccionar un módulo');
+        }
+        $("#ListaMateriasPorModuloProrrogas").html("");
+        $.getJSON('@Url.Action("BuscarMateria", "Reporte")', { nombre: nombre, idModulo: $("#idModuloProrrogasPorModuloPorGrupo").val() }, function (o) {
+            var html = "";
+            for (var i = 0; i < o.length; i++) {
+                html += "<tr><td>" + o[i].nombre + "</td><td>" + o[i].materia + "</td><td>" + o[i].turno + "</td><td>" + o[i].docente + "</td><td><button type='button' class='btn btn-accion btn-sm' onclick='SeleccionarMateriaProrrogas(" + o[i].id + ")'><i class='fas fa-thumbs-up'></i></button></td></tr>";
+            }
+            $("#ListaMateriasPorModuloProrrogas").html(html);
+            $('#cuerpoOferta').css('height', '300px');
+        });
+    }
+
+    function SeleccionarMateriaProrrogas(idGrupo) {
+        $("#idGrupoProrrogasPorModulo").val(idGrupo);
+        $("#ListaMateriasPorModuloProrrogas").html("");
+        $.getJSON('@Url.Action("SeleccionarMateria", "Reporte")', { idGrupo: idGrupo }, function (o) {
+            var codhtml = "";
+            codhtml += "<tr><td>" + o.nombre + "</td><td>" + o.materia + "</td><td>" + o.turno + "</td><td>" + o.docente + "</td><td>Seleccionada</td></tr>";
+            $("#ListaMateriasPorModuloProrrogas").html(codhtml);
+            $('#cuerpoOferta').css('height', '130px');
+        });
+    }
+
+    function BuscarMateriaPorModuloRegistros(nombre) {
+        if ($("#idModuloRegistrosPorModuloPorGrupo").val() == 0) {
+            return Toast('warning', 'Debe seleccionar un módulo');
+        }
+        $("#ListaMateriasPorModuloRegistros").html("");
+        $.getJSON('@Url.Action("BuscarMateria", "Reporte")', { nombre: nombre, idModulo: $("#idModuloRegistrosPorModuloPorGrupo").val() }, function (o) {
+            var html = "";
+            for (var i = 0; i < o.length; i++) {
+                html += "<tr><td>" + o[i].nombre + "</td><td>" + o[i].materia + "</td><td>" + o[i].turno + "</td><td>" + o[i].docente + "</td><td><button type='button' class='btn btn-accion btn-sm' onclick='SeleccionarMateriaRegistros(" + o[i].id + ")'><i class='fas fa-thumbs-up'></i></button></td></tr>";
+            }
+            $("#ListaMateriasPorModuloRegistros").html(html);
+            $('#cuerpoOfertaRegistro').css('height', '300px');
+        });
+    }
+
+    function SeleccionarMateriaRegistros(idGrupo) {
+        $("#idGrupoRegistrosPorModulo").val(idGrupo);
+        $("#ListaMateriasPorModuloRegistros").html("");
+        $.getJSON('@Url.Action("SeleccionarMateria", "Reporte")', { idGrupo: idGrupo }, function (o) {
+            var codhtml = "";
+            codhtml += "<tr><td>" + o.nombre + "</td><td>" + o.materia + "</td><td>" + o.turno + "</td><td>" + o.docente + "</td><td>Seleccionada</td></tr>";
+            $("#ListaMateriasPorModuloRegistros").html(codhtml);
+            $('#cuerpoOfertaRegistro').css('height', '130px');
+        });
+    }
+
+    function RepEstudiantesConDobleProrroga() {
+        Limpiar();
+        var idModulo = $("#idModuloEstudiantesConDosProrrogas").val();
+        if (idModulo == 0) {
+            return Toast('warning', 'Debe seleccionar un módulo');
+        }
+        var tipo = $('input[name=RepEstudianteDobleProrroga]:checked').val();
+        var url = '@Url.Action("EstudiantesConDobleProrroga", "Reporte")' + '?idModulo=' + idModulo + '&tipo=' + tipo;;
+        $("#modalRepEstudiantesConDosProrrogas").modal('hide');
+        Limpiar();
+        window.open(url);
+    }
+
+    function RepProrrogasPorModulo() {
+        var idModulo = $("#idModuloProrrogasPorModulo").val();
+        if (idModulo == 0) {
+            return Toast('warning', 'Debe seleccionar un módulo');
+        }
+        var tipo = $('input[name=RepProrrogasPorModulo]:checked').val();
+        var url = '@Url.Action("ProrrogasPorModulo", "Reporte")' + '?idModulo=' + idModulo + '&tipo=' + tipo;;
+        $("#modalRepProrrogasPorModulo").modal('hide');
+        Limpiar();
+        window.open(url);
+    }
+
+    function RepProrrogasPorModuloPorGrupo() {
+        var idModulo = $("#idModuloProrrogasPorModuloPorGrupo").val();
+        if (idModulo == 0) {
+            return Toast('warning', 'Debe seleccionar un módulo');
+        }
+        var idGrupo = $("#idGrupoProrrogasPorModulo").val();
+        if (idGrupo == 0) {
+            return Toast('warning', 'Debe seleccionar un grupo');
+        }
+        var tipo = $('input[name=RepProrrogasPorModuloPorGrupo]:checked').val();
+        var url = '@Url.Action("RepProrrogasPorModuloPorGrupo", "Reporte")' + '?idModulo=' + idModulo + '&idGrupo=' + idGrupo + '&tipo=' + tipo;;
+        $("#modalRepProrrogasPorModuloPorGrupo").modal('hide');
+        Limpiar();
+        window.open(url);
+    }
+
+    function RepRegistrosPorModuloPorGrupo() {
+        var idModulo = $("#idModuloRegistrosPorModuloPorGrupo").val();
+        if (idModulo == 0) {
+            return Toast('warning', 'Debe seleccionar un módulo');
+        }
+        var idGrupo = $("#idGrupoRegistrosPorModulo").val();
+        if (idGrupo == 0) {
+            return Toast('warning', 'Debe seleccionar un grupo');
+        }
+        var tipo = $('input[name=RepRegistrosPorModuloPorGrupo]:checked').val();
+        var url = '@Url.Action("RepRegistrosPorModuloPorGrupo", "Reporte")' + '?idModulo=' + idModulo + '&idGrupo=' + idGrupo + '&tipo=' + tipo;;
+        $("#modalRepRegistrosPorModuloPorGrupo").modal('hide');
+        Limpiar();
+        window.open(url);
+    }
+
+</script>
+

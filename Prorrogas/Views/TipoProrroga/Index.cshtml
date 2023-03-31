@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h4>Tipos de prórroga</h4>
+<div id="cargando" class="text-center">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div class="table-responsive mt-4" id="contenido">
+    <table id="tabla" class="table table-striped table-bordered display" style="width:100%"></table>
+</div>
+
+<!--Modal-->
+<div class="modal fade" id="modalTipos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-franja"></div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tipo de prórroga</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Nombre:</label>
+                            <input type="text" class="form-control" id="id" hidden="hidden">
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mt-3">
+                        <div class="form-group">
+                            <label>Descripción:</label>
+                            <textarea class="form-control" id="descripcion" placeholder="Descripción" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-accion" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="btn-flotante" data-bs-toggle="modal" data-bs-target="#modalTipos" onclick="Limpiar()"><i class="fas fa-plus"></i></a>
+
+<script>
+    tabla = $('#tabla').DataTable({
+            columns: [
+                { title: "#", width: '5%' },
+                { title: "Nombre", width: '25%' },
+                { title: "Descripción", width: '45%' },
+                { title: "Estado", width: '20%' },
+                { title: "Opciones", width: '5%' }
+            ],
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+            },
+            "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]]
+        });
+        $("#cargando").show();
+        $("#contenido").hide();
+        $(document).ready(function () {
+
+            setTimeout(function () {
+                $("#cargando").hide();
+                $("#contenido").show();
+                Actualizar();
+            }, 1000);
+        });
+
+    function Limpiar() {
+        $("#id").val(0);
+        $("#nombre").val("");
+        $("#descripcion").val("");
+    }
+
+    function Actualizar() {
+        $.getJSON('@Url.Action("Actualizar", "TipoProrroga")', function (o) {
+            tabla.destroy();
+            tabla = $("#tabla").DataTable({
+                data: o,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                }
+            });
+        });
+    }
+
+    function Guardar() {
+        var c = { id: $("#id").val(), nombre: $("#nombre").val(), descripcion: $("#descripcion").val() };
+        console.log(c);
+        $.ajax({
+            url: '@Url.Action("Guardar", "TipoProrroga")',
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(c),
+            success: function (s) {
+                switch (s.Tipo) {
+                    case 1:
+                        Toast("success", s.Msj);
+                        $("#modalTipos").modal('hide');
+                        Limpiar();
+                        Actualizar();
+                        break;
+                    case 2:
+                        Toast("warning", s.Msj);
+                        break;
+                    case 3:
+                        Toast("error", s.Msj);
+                        break;
+                };
+            }
+        });
+    }
+
+    function Editar(id)
+    {
+        $.getJSON('@Url.Action("Editar", "TipoProrroga")', { id: id }, function (o) {
+            $("#id").val(o.id);
+            $("#nombre").val(o.nombre);
+            $("#descripcion").val(o.descripcion);
+        });
+    }
+
+    function Deshabilitar(id)
+    {
+        cuteAlert({
+            type: "question",
+            title: "Deshabilitar",
+            message: "¿Esta seguro que desea deshabilitar el tipo de prórroga?",
+            confirmText: "Aceptar",
+            cancelText: "Cancelar"
+        }).then((e) => {
+            console.log(e);
+            if (e == ("confirm")) {
+                $.getJSON('@Url.Action("Deshabilitar", "TipoProrroga")', { id: id }, function (s) {
+                    switch (s.Tipo) {
+                        case 1:
+                            Actualizar();
+                            Toast("success", s.Msj);
+                            break;
+                        case 2:
+                            Toast("warning", s.Msj);
+                            break;
+                        case 3:
+                            Toast("error", s.Msj);
+                            break;
+                    };
+                });
+            }
+        })
+    }
+
+    function Habilitar(id)
+    {
+        cuteAlert({
+            type: "question",
+            title: "Habilitar",
+            message: "¿Esta seguro que desea habilitar el tipo de prórroga?",
+            confirmText: "Aceptar",
+            cancelText: "Cancelar"
+        }).then((e) => {
+            if (e == ("confirm")) {
+                $.getJSON('@Url.Action("Habilitar","TipoProrroga")', { id: id }, function (s) {
+                    switch (s.Tipo) {
+                        case 1:
+                            Actualizar();
+                            Toast("success", s.Msj);
+                            break;
+                        case 2:
+                            Toast("warning", s.Msj);
+                            break;
+                        case 3:
+                            Toast("error", s.Msj);
+                            break;
+                    };
+                });
+            }
+        })
+    }
+</script>

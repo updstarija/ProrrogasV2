@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a5ebef8e73974853bbd0929675216b10" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="SAADSTJModel.Estudiante" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SAADSTJModel.InscripcionCarrera" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SAADSTJModel.Persona" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SAADSTJModel.PlanEstudio" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="SAADSTJModel.FK__Estudiante__Id__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="SAADSTJModel.FK__Inscripci__IdEst__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="SAADSTJModel.FK__Inscripci__IdPla__3E1D39E1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SAADSTJModel.GrupoAperturado" Width="1.5" PointX="7.75" PointY="1" />
+        <EntityTypeShape EntityType="SAADSTJModel.Materia" Width="1.5" PointX="7.25" PointY="32.625" />
+        <EntityTypeShape EntityType="SAADSTJModel.MateriaContenido" Width="1.5" PointX="3.75" PointY="31.375" />
+        <EntityTypeShape EntityType="SAADSTJModel.Oferta" Width="1.5" PointX="3.75" PointY="27.125" />
+        <EntityTypeShape EntityType="SAADSTJModel.OfertaSistemaEstudio" Width="1.5" PointX="3.75" PointY="23.5" />
+        <EntityTypeShape EntityType="SAADSTJModel.Turno" Width="1.5" PointX="0.75" PointY="9.75" />
+        <AssociationConnector Association="SAADSTJModel.FK__Estudiant__IdTur__056ECC6A" />
+        <AssociationConnector Association="SAADSTJModel.FK__GrupoAper__IdMat__73852659" />
+        <AssociationConnector Association="SAADSTJModel.FK__GrupoAper__IdTur__74794A92" />
+        <AssociationConnector Association="SAADSTJModel.FK_GrupoAperturado_OfertaSistemaEstudio" />
+        <AssociationConnector Association="SAADSTJModel.FK__Inscripci__IdTur__42E1EEFE" />
+        <AssociationConnector Association="SAADSTJModel.FK_Materia_MateriaContenido" />
+        <AssociationConnector Association="SAADSTJModel.FK__OfertaSis__IdOfe__6442E2C9" />
+        <EntityTypeShape EntityType="SAADSTJModel.Aula" Width="1.5" PointX="7.75" PointY="8.875" />
+        <EntityTypeShape EntityType="SAADSTJModel.HorarioGrupo" Width="1.5" PointX="10" PointY="2.875" />
+        <AssociationConnector Association="SAADSTJModel.FK__HorarioGr__IdAul__1C5231C2" />
+        <AssociationConnector Association="SAADSTJModel.FK_HorarioGrupo_GrupoAperturado" />
+        <EntityTypeShape EntityType="SAADSTJModel.ComprobanteRegistro" Width="1.5" PointX="7.5" PointY="12.625" />
+        <EntityTypeShape EntityType="SAADSTJModel.RegistroDeMateria" Width="1.5" PointX="10" PointY="15.625" />
+        <AssociationConnector Association="SAADSTJModel.FK__Comproban__IdIns__21D600EE" />
+        <AssociationConnector Association="SAADSTJModel.FK__RegistroD__IdCom__2AF556D4" />
+        <AssociationConnector Association="SAADSTJModel.FK_RegistroDeMateria_GrupoAperturado" />
+        <AssociationConnector Association="SAADSTJModel.FK_RegistroDeMateria_Materia" />
+        <AssociationConnector Association="SAADSTJModel.FK_MateriaContenido_MateriaContenido" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

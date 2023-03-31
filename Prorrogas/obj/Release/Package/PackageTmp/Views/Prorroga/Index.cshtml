@@ -1,0 +1,577 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4>Prórrogas</h4>
+<ul class="nav nav-tabs text-center mb-2" style="width:100%;" id="sub-menu">
+</ul>
+<div id="cargando" class="text-center mt-5">
+    <div class="spinner-border mt-5" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div class="table-responsive mt-2" id="contenido">
+    <table id="tabla" class="table table-striped table-bordered display" style="width:100%"></table>
+</div>
+
+<!--Modal Prorroga-->
+<div class="modal fade" id="modalProrroga" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-franja"></div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Prórroga</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="min-height:350px;">
+                <div class="row">
+                    <!--columna 1-->
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>Buscar estudiante:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="idProrroga" hidden="hidden" />
+                                    <input type="text" class="form-control" id="idEstudiante" hidden="hidden" />
+                                    <input type="text" class="form-control" id="idModulo" hidden="hidden" />
+                                    <input type="search" class="form-control" id="buscar" placeholder="Buscar por CI" oninput="BuscarEstudiante(this.value)">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                </div>
+                                <ul id="ListaEstudiantes" class="list-group">
+                                </ul>
+                                <div id="DatosEstudiante" class="mt-2"></div>
+                                <div id="CarrerasEstudiantes">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--columna 2-->
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>Seleccionar tipo prórroga:</label>
+                                <select id="idtipoProrroga" class="form-select"></select>
+                            </div>
+                            <div class="col-sm-12 mt-2">
+                                <label>Buscar Materia:</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="idGrupo" hidden="hidden" />
+                                    <input type="search" class="form-control" id="buscarMateria" placeholder="Buscar por nombre" oninput="BuscarMateria(this.value)">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                </div>
+                                <div id="cuerpoOferta">
+                                    <table class="table table-striped table-hover">
+                                        <thead class="table-primary">
+                                            <tr>
+                                                <th width="10%">Grupo</th>
+                                                <th width="48%">Materia</th>
+                                                <th width="15%">Turno</th>
+                                                <th width="10%">Aula</th>
+                                                <th width="7%">cupo</th>
+                                                <th width="10%"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="ListaMaterias">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5 class="mt-2">Datos Prorroga</h5>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Fecha Inicio</label>
+                                        <input type="date" class="form-control" id="fechaInicio" disabled="disabled" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Fecha Fin</label>
+                                        <input type="date" class="form-control" id="fechaFin" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-accion" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Extencion-->
+<div class="modal fade" id="modalProrrogasExtencion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-franja"></div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Extender prórroga</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="min-height:300px;">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div id="DatosEstudianteExtender" class="mt-2">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="DatosProrrogaExtender" class="mt-2">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-accion" onclick="ExtenderProrroga()">Extender</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Ayuda-->
+<div class="modal fade" id="modalAyuda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-franja"></div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ayuda</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <span style="color: #5D6D7E"><i class='fas fa-file-pdf'></i></span><span class="mx-3">Imprimir comprobante</span>
+                            </li>
+                            <li class="list-group-item">
+                                <span style="color: #5DADE2"><i class='fas fa-calendar-plus'></i></span><span class="mx-3">Extender prórroga</span>
+                            </li>
+                            <li class="list-group-item">
+                                <span style="color: #D35400"><i class='fas fa-times'></i></span><span class="mx-3">Inactivar prórroga</span>
+                            </li>
+                            <li class="list-group-item">
+                                <span style="color: #CD6155"><i class='fas fa-trash-alt'></i></span><span class="mx-3">Eliminar o anular prórroga</span>
+                            </li>
+                            <li class="list-group-item">
+                                <span><i class="fas fa-hourglass-start"></i></span><span class="mx-3">Prórroga extendida</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="btn-flotante" data-bs-toggle="modal" data-bs-target="#modalProrroga" onclick="Limpiar()"><i class="fas fa-plus"></i></a>
+
+<script>
+
+    tabla = $('#tabla').DataTable({
+        columns: [
+            { title: "#", width: '5%' },
+            { title: "Registro", width: '10%' },
+            { title: "Carrera", width: '15%' },
+            { title: "Estudiante", width: '15%' },
+            { title: "Tipo", width: '10%' },
+            { title: "Materia", width: '15%' },
+            { title: "Grupo", width: '5%' },
+            { title: "Finalización", width: '10%' },
+            { title: "Estado", width: '10%' },
+            { title: "<button class='btn btn-Ayuda' data-bs-toggle='modal' data-bs-target='#modalAyuda'>Ayuda</button>", width: '5%' }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        },
+        "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]]
+    });
+    $("#cargando").show();
+    $("#contenido").hide();
+    $(document).ready(function () {
+        setTimeout(function () {
+            $("#cargando").hide();
+            $("#contenido").show();
+            MostrarModulos();
+            ModuloActual();
+        }, 1000);
+    });
+
+    function BuscarEstudiante(ci) {
+        $("#DatosEstudiante").html("");
+        $("#CarrerasEstudiantes").html("");
+        $("#ListaEstudiantes").html("");
+        $.getJSON('@Url.Action("BuscarEstudiante", "Prorroga")', { ci: ci }, function (o) {
+            var html = "";
+            for (var i = 0; i < o.length; i++) {
+                html += "<li class='list-group-item list-hover' onclick='SeleccionarEstudiante(" + o[i].id + ")'>" + o[i].nombreCompleto + "</li>";
+            }
+            $("#ListaEstudiantes").html(html);
+        });
+    }
+
+    function SeleccionarEstudiante(idPersona) {
+        $("#idEstudiante").val(idPersona);
+        $("#ListaEstudiantes").html("");
+        $("#DatosEstudiante").html("");
+        $("#CarrerasEstudiantes").html("");
+        $.getJSON('@Url.Action("SeleccionarEstudiante", "Prorroga")', { idPersona: idPersona }, function (o) {
+            var codHtml = "<div class='row mt-1'>" +
+                                "<div class='text-center'>"+
+                                    "<h5>Datos Personales</h5>"+
+                                "</div>"+
+                                    "<div class='col-sm-6'>" +
+                                        "<div class='text-center mt-3' style='inline-size: 220px; overflow-wrap: break-word;'>" +
+                                            "<img src='https://winaero.com/blog/wp-content/uploads/2017/12/User-icon-256-blue.png' class='rounded-circle border' alt='Foto' style='height:150px; width:150px;'>" +
+                                            "<p class='datosPersona'>" + o.correo + "</p>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div class='col-sm-6'>" +
+                                        "<div class='mt-4'>" +
+                                            "<p class='datosPersona'> <b>Nombre: </b>" + o.nombre + "</p>" +
+                                            "<p class='datosPersona'> <b>Apellido Paterno: </b>" + o.aPaterno + "</p>" +
+                                            "<p class='datosPersona'> <b>Apellido Materno: </b>" + o.aMaterno + "</p>" +
+                                            "<p class='datosPersona'> <b>CI: </b>" + o.ci + "</p>" +
+                                            "<p class='datosPersona'> <b>Celular: </b>" + o.celular + "</p>" +
+                                        "</div>" +
+                                    "</div>" +
+                               "</div>";
+            $("#DatosEstudiante").html(codHtml);
+        });
+        $.getJSON('@Url.Action("CarrerasEstudiante", "Prorroga")', { idPersona: idPersona }, function (o) {
+            var carreras = "<h5 class='text-center mb-3'>Carreras</h5><select class='form-select' id='idCarrera'>";
+            for (var i = 0; i < o.length; i++) {
+                if (i == 0) {
+                    carreras += "<option value='" + o[i].id + "' selected>" + o[i].nombre + "</option>";
+                } else {
+                    carreras += "<option value='" + o[i].id + "'>" + o[i].nombre + "</option>";
+                }
+            }
+            carreras += "</select>";
+            $("#CarrerasEstudiantes").html(carreras);
+        });
+    }
+
+    function ListarTipos() {
+        $.getJSON('@Url.Action("ListarSelect", "TipoProrroga")', function (o) {
+            $("#idtipoProrroga").html("");
+            var option = "<option value='0' selected>Seleccionar</option>";
+            $("#idtipoProrroga").append(option);
+            for (var i = 0; i < o.length; i++) {
+                option = "<option value='" + o[i].id + "'>" + o[i].nombre + "</option>";
+                $("#idtipoProrroga").append(option);
+            }
+        });
+    }
+
+    function MostrarModulos() {
+        $.getJSON('@Url.Action("MostrarModulos", "Prorroga")', function (o) {
+            $("#sub-menu").html("");
+            var option = "";
+            $("#sub-menu").append(option);
+            for (var i = 0; i < o.length; i++) {
+                if (i == 0) {
+                    option = "<li class='nav-item sub-menu-prorroga sub-menu-prorroga-activado' id='" + o[i].id + "' onclick='Actualizar(" + o[i].id + ")'>" +
+                                "<a class='nav-link'>" + o[i].nombre + "</a>" +
+                            "</li>";
+                } else {
+                    option = "<li class='nav-item sub-menu-prorroga' id='" + o[i].id + "' onclick='Actualizar(" + o[i].id + ")'>" +
+                                "<a class='nav-link'>" + o[i].nombre + "</a>" +
+                            "</li>";
+                }
+                $("#sub-menu").append(option);
+            }
+        });
+    }
+
+    function ModuloActual() {
+        $.getJSON('@Url.Action("MostrarModuloActual", "Prorroga")', function (o) {
+            Actualizar(o.id);
+            $("#idModulo").val(o.id);
+        });
+    }
+
+    function BuscarMateria(nombre) {
+        $("#ListaMaterias").html("");
+        $.getJSON('@Url.Action("BuscarMateria", "Prorroga")', { nombre: nombre, idModulo: $("#idModulo").val() }, function (o) {
+            var html = "";
+            for (var i = 0; i < o.length; i++) {
+                html += "<tr><td>" + o[i].nombre + "</td><td>" + o[i].materia + "</td><td>" + o[i].turno + "</td><td>" + o[i].aula + "</td><td>" + o[i].cupo + "</td><td><button type='button' class='btn btn-accion btn-sm' onclick='SeleccionarMateria(" + o[i].id + ")'><i class='fas fa-thumbs-up'></i></button></td></tr>";
+            }
+            $("#ListaMaterias").html(html);
+            $('#cuerpoOferta').css('height', '250px');
+        });
+    }
+
+    function SeleccionarMateria(idGrupo) {
+        $("#idGrupo").val(idGrupo);
+        $("#ListaMaterias").html("");
+        $.getJSON('@Url.Action("SeleccionarMateria", "Prorroga")', { idGrupo: idGrupo }, function (o) {
+            var codhtml = "";
+            codhtml += "<tr><td>" + o.nombre + "</td><td>" + o.materia + "</td><td>" + o.turno + "</td><td>" + o.aula + "</td><td>" + o.cupo + "</td><td>Seleccionada</td></tr>";
+            $("#ListaMaterias").html(codhtml);
+            $('#cuerpoOferta').css('height', '130px');
+        });
+    }
+
+    function Limpiar() {
+        RangoFechas();
+        $("#buscar").val("");
+        $("#ListaEstudiantes").html("");
+        ListarTipos();
+        $("#idProrroga").val(0);
+        $("#idEstudiante").val(0);
+        $("#idCarrera").val(0);
+        $("#buscarMateria").val("");
+        $("#idGrupo").val(0);
+        $("#ListaMaterias").html("");
+        $("#DatosEstudiante").html("");
+        DatosEstudiantesProtegidos();
+        $('#cuerpoOferta').css('height', '80px');
+    }
+
+    function RangoFechas() {
+        $.getJSON('@Url.Action("RangoFechas", "Prorroga")', { idModulo: $("#idModulo").val() }, function (fechas) {
+            $("#fechaInicio").val(fechas.inicio);
+            $("#fechaFin").val(fechas.fin);
+        });
+    }
+
+    function DatosEstudiantesProtegidos() {
+        var codHtml = "<div class='row mt-1'>" +
+                        "<div class='text-center'>" +
+                            "<h5>Datos Personales</h5>" +
+                        "</div>" +
+                    "<div class='col-sm-5'>" +
+                        "<div class='text-center mt-3'>" +
+                            "<img src='https://winaero.com/blog/wp-content/uploads/2017/12/User-icon-256-blue.png' class='rounded-circle border' alt='Foto' style='height:150px; width:150px;'>" +
+                            "<p class='datosPersona'><span class='placeholder col-7'></span></p>" +
+                        "</div>" +
+                    "</div>" +
+                    "<div class='col-sm-7'>" +
+                            "<div class='mt-4'>" +
+                                "<p class='datosPersona'> <b>Nombre: </b><span class='placeholder col-7'></span></p>" +
+                                "<p class='datosPersona'> <b>Apellido Paterno: </b><span class='placeholder col-4'></span></p>" +
+                                "<p class='datosPersona'> <b>Apellido Materno: </b><span class='placeholder col-3'></span></p>" +
+                                "<p class='datosPersona'> <b>CI: </b><span class='placeholder col-3'></span></p>" +
+                                "<p class='datosPersona'> <b>Celular: </b><span class='placeholder col-2'></span></p>" +
+                            "</div>" +
+                        "</div>" +
+                    "</div>";
+        $("#DatosEstudiante").html(codHtml);
+    }
+
+    function Actualizar(idModulo) {
+        var subMenu = document.getElementsByClassName("sub-menu-prorroga");
+        for (var i = 0; i < subMenu.length; i++) {
+            subMenu[i].classList.remove("sub-menu-prorroga-activado");
+        }
+        $("#cargando").show();
+        $("#contenido").hide();
+        $.getJSON('@Url.Action("Actualizar", "Prorroga")', { idModulo: idModulo}, function (o) {
+            tabla.destroy();
+            tabla = $("#tabla").DataTable({
+                data: o,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                }
+            });
+            $("#cargando").hide();
+            $("#contenido").show();
+            setTimeout(function () {
+                $('[data-bs-toggle="tooltip"]').tooltip()
+            }, 500);
+        });
+        $("#" + idModulo + "").addClass('sub-menu-prorroga-activado');
+        $("#idModulo").val(idModulo);
+    }
+
+    function Guardar() {
+        var c =
+        {
+            id: $("#idProrroga").val(),
+            idEstudiante: $("#idEstudiante").val(),
+            idCarrera: $("#idCarrera").val(),
+            idGrupo: $("#idGrupo").val(),
+            idtipoProrroga: $("#idtipoProrroga").val(),
+            idModulo: $("#idModulo").val(),
+            fechaInicio: $("#fechaInicio").val(),
+            fechaFin: $("#fechaFin").val()
+        };
+        console.log(c);
+        $.ajax({
+            url: '@Url.Action("Guardar", "Prorroga")',
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(c),
+            success: function (s) {
+                switch (s.Tipo) {
+                    case 1:
+                        Toast("success", s.Msj);
+                        $("#modalProrroga").modal('hide');
+                        Actualizar($("#idModulo").val());
+                        ImprimirComprobante(s.Id);
+                        break;
+                    case 2:
+                        Toast("warning", s.Msj);
+                        break;
+                    case 3:
+                        Toast("error", s.Msj);
+                        break;
+                };
+            }
+        });
+    }
+
+    function Extender(idProrroga) {
+        $("#idProrroga").val(idProrroga);
+        $.getJSON('@Url.Action("MostrarProrroga", "Prorroga")', { idProrroga: idProrroga }, function (p) {
+            $("#modalProrrogasExtencion").modal('show');
+            $("#DatosEstudianteExtender").html("");
+            $("#DatosProrrogaExtender").html("");
+            $.getJSON('@Url.Action("SeleccionarEstudiante", "Prorroga")', { idPersona: p.idEstudiante }, function (o) {
+                var codHtml = "<div class='row'>" +
+                                        "<div class='col-sm-12'><div class='text-center' > " +
+                                            "<h5>Datos Personales</h5>" +
+                                        "</div></div>"+
+                                        "<div class='col-sm-6 mt-3'>" +
+                                            "<div class='text-center' style='inline-size: 220px; overflow-wrap: break-word;'>" +
+                                                "<img src='https://winaero.com/blog/wp-content/uploads/2017/12/User-icon-256-blue.png' class='rounded-circle border' alt='Foto' style='height:150px; width:150px;'>" +
+                                                "<p class='datosPersona'>" + o.correo + "</p>" +
+                                            "</div>" +
+                                        "</div>" +
+                                        "<div class='col-sm-6 mt-3'>" +
+                                            "<div>" +
+                                                "<p class='datosPersona'> <b>Nombre: </b>" + o.nombre + "</p>" +
+                                                "<p class='datosPersona'> <b>Apellido Paterno: </b>" + o.aPaterno + "</p>" +
+                                                "<p class='datosPersona'> <b>Apellido Materno: </b>" + o.aMaterno + "</p>" +
+                                                "<p class='datosPersona'> <b>CI: </b>" + o.ci + "</p>" +
+                                                "<p class='datosPersona'> <b>Celular: </b>" + o.celular + "</p>" +
+                                            "</div>" +
+                                        "</div>" +
+                                "</div>";
+                var codHtml2 = "<div class='row'>" +
+                                    "<div class='col-sm-12'><div class='text-center mb-2'>" +
+                                        "<h5>Datos de la prórroga</h5>" +
+                                    "</div></div>" +
+                                    "<div class='col-sm-6 mt-3'>" +
+                                        "<p class='datosPersona' > <b>Carrera: </b>" + p.carrera + "</p>" +
+                                        "<p class='datosPersona'><b>Grupo: </b>" + p.grupo + "</p>" +
+                                        "<p class='datosPersona'><b>Materia: </b>" + p.materia + "</p>" +
+                                        "<p class='datosPersona'><b>Turno: </b>" + p.turno + "</p>" +
+                                        "<p class='datosPersona'><b>Aula: </b>" + p.aula + "</p>" +
+                                    "</div >" +
+                                    "<div class='col-sm-6 mt-3'>" +
+                                        "<p class='datosPersona'><b>Tipo prórroga: </b>" + p.tipo + "</p>" +
+                                        "<p class='datosPersona'><b>Fecha Registro: </b>" + p.fechaRegistro + "</p>" +
+                                        "<p class='datosPersona'><b>Fecha Fin: </b>" + p.fechaFin + "</p>" +
+                                        "<label class='datosPersona'><b>Fecha Extendida</b></label>" +
+                                        "<input type='date' class='form-control' id='fechaExtension' />" +
+                                    "</div>" +
+                                "</div>";
+                $("#DatosProrrogaExtender").html(codHtml2);
+                $("#DatosEstudianteExtender").html(codHtml);
+            });
+            setTimeout(function () {
+                $('[data-bs-toggle="tooltip"]').tooltip()
+            }, 500);
+        });
+    }
+
+    function Anular(id)
+    {
+        cuteAlert({
+            type: "question",
+            title: "Anular",
+            message: "¿Esta seguro que desea anular la prórroga?",
+            confirmText: "Aceptar",
+            cancelText: "Cancelar"
+        }).then((e) => {
+            if (e == ("confirm")) {
+                $.getJSON('@Url.Action("Anular", "Prorroga")', { id: id }, function (s) {
+                    switch (s.Tipo) {
+                        case 1:
+                            Actualizar($("#idModulo").val());
+                            Toast("success", s.Msj);
+                            break;
+                        case 2:
+                            Toast("warning", s.Msj);
+                            break;
+                        case 3:
+                            Toast("error", s.Msj);
+                            break;
+                    };
+                });
+            }
+        })
+    }
+
+    function Inactivar(id)
+    {
+        cuteAlert({
+            type: "question",
+            title: "Baja",
+            message: "¿Esta seguro que desea dar de baja la prórroga?",
+            confirmText: "Aceptar",
+            cancelText: "Cancelar"
+        }).then((e) => {
+            if (e == ("confirm")) {
+                $.getJSON('@Url.Action("Inactivar", "Prorroga")', { id: id }, function (s) {
+                    switch (s.Tipo) {
+                        case 1:
+                            Actualizar($("#idModulo").val());
+                            Toast("success", s.Msj);
+                            break;
+                        case 2:
+                            Toast("warning", s.Msj);
+                            break;
+                        case 3:
+                            Toast("error", s.Msj);
+                            break;
+                    };
+                });
+            }
+        })
+    }
+
+    function ImprimirComprobante(id) {
+        var url = '@Url.Action("Comprobante", "Reporte")' + '?idProrroga=' + id;;
+        window.open(url);
+    }
+
+    function ExtenderProrroga() {
+        $("#modalProrrogasExtencion").modal('hide');
+        cuteAlert({
+            type: "question",
+            title: "Extender prorroga",
+            message: "¿Esta seguro que extender la prórroga?",
+            confirmText: "Aceptar",
+            cancelText: "Cancelar"
+        }).then((e) => {
+            if (e == ("confirm")) {
+                $.getJSON('@Url.Action("ExtenderProrroga", "Prorroga")', { idProrroga: $("#idProrroga").val(), fechaExtension: $("#fechaExtension").val() }, function (s) {
+                    switch (s.Tipo) {
+                        case 1:
+                            Toast("success", s.Msj);
+                            Actualizar($("#idModulo").val());
+                            break;
+                        case 2:
+                            Toast("warning", s.Msj);
+                            break;
+                        case 3:
+                            Toast("error", s.Msj);
+                            break;
+                    };
+                });
+            } else {
+                $("#modalProrrogasExtencion").modal('show');
+            }
+        })
+    }
+</script>

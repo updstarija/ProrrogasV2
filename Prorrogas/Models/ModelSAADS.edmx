@@ -1,0 +1,1501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SAADSTJModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aula">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="IdEstado" Type="smallint" />
+          <Property Name="IdTipoAula" Type="smallint" />
+          <Property Name="CapacidadAlumno" Type="smallint" />
+          <Property Name="CapacidadMaxima" Type="smallint" />
+        </EntityType>
+        <EntityType Name="ComprobanteRegistro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="FechaHora" Type="datetime" />
+          <Property Name="IdInscripcionCarrera" Type="int" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdEstado" Type="smallint" Nullable="false" />
+          <Property Name="IdMotivoRegistroEspecial" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="AnioEgresoBachiller" Type="smallint" />
+          <Property Name="NroTitulo" Type="varchar" MaxLength="30" />
+          <Property Name="NroFolio" Type="int" Nullable="false" />
+          <Property Name="NroFolioPostGrado" Type="varchar" MaxLength="50" />
+          <Property Name="Pin" Type="varchar" MaxLength="30" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="IdColegio" Type="smallint" />
+          <Property Name="IdTutor" Type="int" />
+          <Property Name="IdCondicionLaboral" Type="smallint" />
+          <Property Name="IdTurnoBachiller" Type="smallint" />
+          <Property Name="IdSede" Type="smallint" />
+          <Property Name="IdParentesco" Type="smallint" />
+          <Property Name="FechaTituloBachiller" Type="date" />
+          <Property Name="IdUniversidad" Type="smallint" />
+          <Property Name="IdGrupoDocumento" Type="int" />
+          <Property Name="PersonaReferencia" Type="varchar" MaxLength="200" />
+          <Property Name="TelefonoReferencia" Type="varchar" MaxLength="50" />
+          <Property Name="IdIdiomaMaterno" Type="smallint" />
+          <Property Name="Discapacidad" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdMoodleUsuario" Type="bigint" />
+          <Property Name="EmailOffice365" Type="nvarchar" MaxLength="255" />
+          <Property Name="VeteranoGuerra" Type="bit" />
+        </EntityType>
+        <EntityType Name="GrupoAperturado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Folio" Type="bigint" />
+          <Property Name="CupoOfertado" Type="smallint" Nullable="false" />
+          <Property Name="IdOferta" Type="smallint" Nullable="false" />
+          <Property Name="IdMateriaContenido" Type="smallint" Nullable="false" />
+          <Property Name="IdTurno" Type="smallint" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdSistemaEstudio" Type="smallint" Nullable="false" />
+          <Property Name="IdEstadoGrupo" Type="smallint" Nullable="false" />
+          <Property Name="IdDocente" Type="int" Nullable="false" />
+          <Property Name="IdTipoEvaluacion" Type="smallint" Nullable="false" />
+          <Property Name="IdTipoGrupoAperturado" Type="int" Nullable="false" />
+          <Property Name="CostoMateria" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="IdDescripcionGrupo" Type="smallint" Nullable="false" />
+          <Property Name="IdGrupoAperturadoMaestro" Type="bigint" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="MateriaNombre" Type="nvarchar" MaxLength="300" />
+          <Property Name="MateriaSigla" Type="nvarchar" MaxLength="50" />
+          <Property Name="CargaHoraria" Type="int" />
+          <Property Name="Horario" Type="varchar(max)" />
+          <Property Name="Credito" Type="int" />
+          <Property Name="CupoDisponible" Type="int" />
+        </EntityType>
+        <EntityType Name="HorarioGrupo">
+          <Key>
+            <PropertyRef Name="IdGrupoAperturado" />
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="IdGrupoAperturado" Type="bigint" Nullable="false" />
+          <Property Name="Numero" Type="smallint" Nullable="false" />
+          <Property Name="IdAula" Type="smallint" Nullable="false" />
+          <Property Name="IdDia" Type="smallint" Nullable="false" />
+          <Property Name="HoraInicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HoraFin" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InscripcionCarrera">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdPlanEstudio" Type="smallint" Nullable="false" />
+          <Property Name="IdEstudiante" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="IdTipoBeneficio" Type="smallint" />
+          <Property Name="IdSistemaEstudio" Type="smallint" />
+          <Property Name="IdTurno" Type="smallint" />
+          <Property Name="IdFormaPago" Type="smallint" />
+          <Property Name="IdTipoIngreso" Type="smallint" />
+          <Property Name="IdEstado" Type="smallint" />
+          <Property Name="IdSistemaEnsenanza" Type="smallint" />
+          <Property Name="IdTipoEstudiante" Type="int" />
+          <Property Name="Recargo" Type="int" />
+          <Property Name="NroCertificadoEgreso" Type="varchar" MaxLength="50" />
+          <Property Name="Regular" Type="bit" />
+          <Property Name="NroFolio" Type="varchar" MaxLength="50" />
+          <Property Name="NroHabilitacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="SemestreActual" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Sigla" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdEstado" Type="smallint" Nullable="false" />
+          <Property Name="IdMateriaContenido" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MateriaContenido">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" Nullable="false" />
+          <Property Name="Sigla" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdDireccionArea" Type="smallint" />
+          <Property Name="IdEstado" Type="smallint" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="Creditos" Type="smallint" />
+          <Property Name="HorasTeoricasSemanal" Type="smallint" />
+          <Property Name="HorasPracticasSemanal" Type="smallint" />
+          <Property Name="TotalHoras" Type="smallint" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="IdModeloEstudio" Type="int" Nullable="false" />
+          <Property Name="Competencia" Type="varchar" MaxLength="900" />
+          <Property Name="IdTipoMateriaContenido" Type="int" />
+          <Property Name="UrlPrograma" Type="varchar" MaxLength="800" />
+          <Property Name="CantidadModulo" Type="int" />
+          <Property Name="GrupoAcademicoId" Type="smallint" />
+          <Property Name="MateriaContenidoPadreId" Type="smallint" />
+          <Property Name="IdiomaId" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Oferta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" Nullable="false" />
+          <Property Name="IdGestion" Type="smallint" Nullable="false" />
+          <Property Name="NumeroPeriodo" Type="smallint" Nullable="false" />
+          <Property Name="NroOfertaPeriodo" Type="smallint" Nullable="false" />
+          <Property Name="IdGrupoAcademico" Type="smallint" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdSistemaEnsenanza" Type="smallint" Nullable="false" />
+          <Property Name="IdEstadoOferta" Type="smallint" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="NroOrden" Type="smallint" />
+          <Property Name="IdSede" Type="smallint" />
+          <Property Name="IdMoodleCategoria" Type="int" />
+        </EntityType>
+        <EntityType Name="OfertaSistemaEstudio">
+          <Key>
+            <PropertyRef Name="IdOferta" />
+            <PropertyRef Name="IdSistemaEstudio" />
+          </Key>
+          <Property Name="IdOferta" Type="smallint" Nullable="false" />
+          <Property Name="IdSistemaEstudio" Type="smallint" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="FechaLimitePago" Type="date" Nullable="false" />
+          <Property Name="FechaLimiteInscripcion" Type="date" Nullable="false" />
+          <Property Name="FechaExamenParcial" Type="date" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" />
+          <Property Name="IdTipoDocumento" Type="smallint" />
+          <Property Name="DocumentoIdentidad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdCiudadDocumentoIdentidad" Type="smallint" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="TelefonoDomicilio" Type="varchar" MaxLength="15" />
+          <Property Name="Celular" Type="varchar" MaxLength="15" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Email1" Type="varchar" MaxLength="100" />
+          <Property Name="Email2" Type="varchar" MaxLength="100" />
+          <Property Name="SitioWeb" Type="varchar" MaxLength="50" />
+          <Property Name="Facebook" Type="varchar" MaxLength="50" />
+          <Property Name="InstitucionTrabajo" Type="varchar" MaxLength="50" />
+          <Property Name="DireccionTrabajo" Type="varchar" MaxLength="100" />
+          <Property Name="TelefonoTrabajo" Type="varchar" MaxLength="15" />
+          <Property Name="IdSexo" Type="smallint" />
+          <Property Name="NIT" Type="int" />
+          <Property Name="Observacion" Type="varchar" MaxLength="50" />
+          <Property Name="Fax" Type="varchar" MaxLength="15" />
+          <Property Name="Foto" Type="varchar" MaxLength="100" />
+          <Property Name="IdEstadoCivil" Type="smallint" />
+          <Property Name="IdTipoSangre" Type="smallint" />
+          <Property Name="IdCiudad" Type="smallint" />
+          <Property Name="IdNacionalidad" Type="smallint" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="TieneFoto" Type="bit" />
+          <Property Name="IdRN" Type="int" />
+        </EntityType>
+        <EntityType Name="PlanEstudio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Sigla" Type="varchar" MaxLength="50" />
+          <Property Name="Duracion" Type="smallint" />
+          <Property Name="IdPeriodicidad" Type="smallint" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdEstadoPlan" Type="smallint" />
+          <Property Name="IdCarrera" Type="smallint" />
+          <Property Name="CantidadMaterias" Type="smallint" />
+          <Property Name="CantidadElectivas" Type="smallint" />
+          <Property Name="TotalHorasTeoricas" Type="smallint" />
+          <Property Name="TotalHorasPracticas" Type="smallint" />
+          <Property Name="TotalHorasAutonomas" Type="smallint" />
+          <Property Name="TotalHorasTeoricasVirtuales" Type="smallint" />
+          <Property Name="TotalHorasPracticasVirtuales" Type="smallint" />
+          <Property Name="PeriodicidadInicialElectivas" Type="tinyint" />
+          <Property Name="PeriodoRequeridoPractica" Type="int" />
+          <Property Name="ResolucionMinisterial" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PanelesDeGrado" Type="varchar" MaxLength="250" />
+          <Property Name="CitePlanEstudio" Type="varchar" MaxLength="50" />
+          <Property Name="fechaAprovacion" Type="datetime" />
+          <Property Name="RegimenComplementario" Type="int" />
+          <Property Name="HorasPracticasProfesional" Type="int" />
+          <Property Name="HorasMDG" Type="int" />
+          <Property Name="IdModeloEstudio" Type="int" />
+          <Property Name="IdTipoPlanEstudio" Type="int" />
+          <Property Name="IdSistemaEstudio" Type="smallint" />
+        </EntityType>
+        <EntityType Name="RegistroDeMateria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="IdGrupoAperturado" Type="bigint" Nullable="false" />
+          <Property Name="IdEstadoMateriaRegistrada" Type="smallint" Nullable="false" />
+          <Property Name="IdComprobanteRegistro" Type="bigint" Nullable="false" />
+          <Property Name="ItemRecibo" Type="smallint" />
+          <Property Name="NumeroRecibo" Type="bigint" />
+          <Property Name="PorcentajeBeca" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Nota" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IdBeca" Type="int" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IdMateria" Type="int" Nullable="false" />
+          <Property Name="IdPlanEstudio" Type="smallint" />
+          <Property Name="IdValidezDetalleRecibo" Type="bigint" />
+          <Property Name="IdNivelDominioCompetencia" Type="int" />
+          <Property Name="FechaModificacion" Type="date" />
+          <Property Name="IdSolicitudRegistroEspecial" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Turno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DescripcionHorario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Comproban__IdIns__21D600EE">
+          <End Role="InscripcionCarrera" Type="Self.InscripcionCarrera" Multiplicity="0..1" />
+          <End Role="ComprobanteRegistro" Type="Self.ComprobanteRegistro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InscripcionCarrera">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComprobanteRegistro">
+              <PropertyRef Name="IdInscripcionCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__IdTur__056ECC6A">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="IdTurnoBachiller" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiante__Id__08B54D69">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GrupoAper__IdMat__73852659">
+          <End Role="MateriaContenido" Type="Self.MateriaContenido" Multiplicity="1" />
+          <End Role="GrupoAperturado" Type="Self.GrupoAperturado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MateriaContenido">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GrupoAperturado">
+              <PropertyRef Name="IdMateriaContenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GrupoAper__IdTur__74794A92">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="1" />
+          <End Role="GrupoAperturado" Type="Self.GrupoAperturado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GrupoAperturado">
+              <PropertyRef Name="IdTurno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HorarioGr__IdAul__1C5231C2">
+          <End Role="Aula" Type="Self.Aula" Multiplicity="1" />
+          <End Role="HorarioGrupo" Type="Self.HorarioGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aula">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HorarioGrupo">
+              <PropertyRef Name="IdAula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__IdEst__3F115E1A">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="InscripcionCarrera" Type="Self.InscripcionCarrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InscripcionCarrera">
+              <PropertyRef Name="IdEstudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__IdPla__3E1D39E1">
+          <End Role="PlanEstudio" Type="Self.PlanEstudio" Multiplicity="1" />
+          <End Role="InscripcionCarrera" Type="Self.InscripcionCarrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanEstudio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InscripcionCarrera">
+              <PropertyRef Name="IdPlanEstudio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__IdTur__42E1EEFE">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="0..1" />
+          <End Role="InscripcionCarrera" Type="Self.InscripcionCarrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InscripcionCarrera">
+              <PropertyRef Name="IdTurno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OfertaSis__IdOfe__6442E2C9">
+          <End Role="Oferta" Type="Self.Oferta" Multiplicity="1" />
+          <End Role="OfertaSistemaEstudio" Type="Self.OfertaSistemaEstudio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oferta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OfertaSistemaEstudio">
+              <PropertyRef Name="IdOferta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RegistroD__IdCom__2AF556D4">
+          <End Role="ComprobanteRegistro" Type="Self.ComprobanteRegistro" Multiplicity="1" />
+          <End Role="RegistroDeMateria" Type="Self.RegistroDeMateria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComprobanteRegistro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistroDeMateria">
+              <PropertyRef Name="IdComprobanteRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GrupoAperturado_OfertaSistemaEstudio">
+          <End Role="OfertaSistemaEstudio" Type="Self.OfertaSistemaEstudio" Multiplicity="1" />
+          <End Role="GrupoAperturado" Type="Self.GrupoAperturado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfertaSistemaEstudio">
+              <PropertyRef Name="IdOferta" />
+              <PropertyRef Name="IdSistemaEstudio" />
+            </Principal>
+            <Dependent Role="GrupoAperturado">
+              <PropertyRef Name="IdOferta" />
+              <PropertyRef Name="IdSistemaEstudio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorarioGrupo_GrupoAperturado">
+          <End Role="GrupoAperturado" Type="Self.GrupoAperturado" Multiplicity="1" />
+          <End Role="HorarioGrupo" Type="Self.HorarioGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoAperturado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HorarioGrupo">
+              <PropertyRef Name="IdGrupoAperturado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materia_MateriaContenido">
+          <End Role="MateriaContenido" Type="Self.MateriaContenido" Multiplicity="1" />
+          <End Role="Materia" Type="Self.Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MateriaContenido">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Materia">
+              <PropertyRef Name="IdMateriaContenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MateriaContenido_MateriaContenido">
+          <End Role="MateriaContenido" Type="Self.MateriaContenido" Multiplicity="0..1" />
+          <End Role="MateriaContenido1" Type="Self.MateriaContenido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MateriaContenido">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MateriaContenido1">
+              <PropertyRef Name="MateriaContenidoPadreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistroDeMateria_GrupoAperturado">
+          <End Role="GrupoAperturado" Type="Self.GrupoAperturado" Multiplicity="1" />
+          <End Role="RegistroDeMateria" Type="Self.RegistroDeMateria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoAperturado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistroDeMateria">
+              <PropertyRef Name="IdGrupoAperturado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistroDeMateria_Materia">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="1" />
+          <End Role="RegistroDeMateria" Type="Self.RegistroDeMateria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistroDeMateria">
+              <PropertyRef Name="IdMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SAADSTJModelStoreContainer">
+          <EntitySet Name="Aula" EntityType="Self.Aula" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComprobanteRegistro" EntityType="Self.ComprobanteRegistro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estudiante" EntityType="Self.Estudiante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GrupoAperturado" EntityType="Self.GrupoAperturado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HorarioGrupo" EntityType="Self.HorarioGrupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InscripcionCarrera" EntityType="Self.InscripcionCarrera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MateriaContenido" EntityType="Self.MateriaContenido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oferta" EntityType="Self.Oferta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfertaSistemaEstudio" EntityType="Self.OfertaSistemaEstudio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanEstudio" EntityType="Self.PlanEstudio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistroDeMateria" EntityType="Self.RegistroDeMateria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Turno" EntityType="Self.Turno" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Comproban__IdIns__21D600EE" Association="Self.FK__Comproban__IdIns__21D600EE">
+            <End Role="InscripcionCarrera" EntitySet="InscripcionCarrera" />
+            <End Role="ComprobanteRegistro" EntitySet="ComprobanteRegistro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__IdTur__056ECC6A" Association="Self.FK__Estudiant__IdTur__056ECC6A">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiante__Id__08B54D69" Association="Self.FK__Estudiante__Id__08B54D69">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GrupoAper__IdMat__73852659" Association="Self.FK__GrupoAper__IdMat__73852659">
+            <End Role="MateriaContenido" EntitySet="MateriaContenido" />
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GrupoAper__IdTur__74794A92" Association="Self.FK__GrupoAper__IdTur__74794A92">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HorarioGr__IdAul__1C5231C2" Association="Self.FK__HorarioGr__IdAul__1C5231C2">
+            <End Role="Aula" EntitySet="Aula" />
+            <End Role="HorarioGrupo" EntitySet="HorarioGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__IdEst__3F115E1A" Association="Self.FK__Inscripci__IdEst__3F115E1A">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="InscripcionCarrera" EntitySet="InscripcionCarrera" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__IdPla__3E1D39E1" Association="Self.FK__Inscripci__IdPla__3E1D39E1">
+            <End Role="PlanEstudio" EntitySet="PlanEstudio" />
+            <End Role="InscripcionCarrera" EntitySet="InscripcionCarrera" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__IdTur__42E1EEFE" Association="Self.FK__Inscripci__IdTur__42E1EEFE">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="InscripcionCarrera" EntitySet="InscripcionCarrera" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OfertaSis__IdOfe__6442E2C9" Association="Self.FK__OfertaSis__IdOfe__6442E2C9">
+            <End Role="Oferta" EntitySet="Oferta" />
+            <End Role="OfertaSistemaEstudio" EntitySet="OfertaSistemaEstudio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RegistroD__IdCom__2AF556D4" Association="Self.FK__RegistroD__IdCom__2AF556D4">
+            <End Role="ComprobanteRegistro" EntitySet="ComprobanteRegistro" />
+            <End Role="RegistroDeMateria" EntitySet="RegistroDeMateria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GrupoAperturado_OfertaSistemaEstudio" Association="Self.FK_GrupoAperturado_OfertaSistemaEstudio">
+            <End Role="OfertaSistemaEstudio" EntitySet="OfertaSistemaEstudio" />
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorarioGrupo_GrupoAperturado" Association="Self.FK_HorarioGrupo_GrupoAperturado">
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+            <End Role="HorarioGrupo" EntitySet="HorarioGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materia_MateriaContenido" Association="Self.FK_Materia_MateriaContenido">
+            <End Role="MateriaContenido" EntitySet="MateriaContenido" />
+            <End Role="Materia" EntitySet="Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MateriaContenido_MateriaContenido" Association="Self.FK_MateriaContenido_MateriaContenido">
+            <End Role="MateriaContenido" EntitySet="MateriaContenido" />
+            <End Role="MateriaContenido1" EntitySet="MateriaContenido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistroDeMateria_GrupoAperturado" Association="Self.FK_RegistroDeMateria_GrupoAperturado">
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+            <End Role="RegistroDeMateria" EntitySet="RegistroDeMateria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistroDeMateria_Materia" Association="Self.FK_RegistroDeMateria_Materia">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="RegistroDeMateria" EntitySet="RegistroDeMateria" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SAADSTJModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="AnioEgresoBachiller" Type="Int16" />
+          <Property Name="NroTitulo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NroFolio" Type="Int32" Nullable="false" />
+          <Property Name="NroFolioPostGrado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pin" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="IdColegio" Type="Int16" />
+          <Property Name="IdTutor" Type="Int32" />
+          <Property Name="IdCondicionLaboral" Type="Int16" />
+          <Property Name="IdTurnoBachiller" Type="Int16" />
+          <Property Name="IdSede" Type="Int16" />
+          <Property Name="IdParentesco" Type="Int16" />
+          <Property Name="FechaTituloBachiller" Type="DateTime" Precision="0" />
+          <Property Name="IdUniversidad" Type="Int16" />
+          <Property Name="IdGrupoDocumento" Type="Int32" />
+          <Property Name="PersonaReferencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoReferencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdIdiomaMaterno" Type="Int16" />
+          <Property Name="Discapacidad" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdMoodleUsuario" Type="Int64" />
+          <Property Name="EmailOffice365" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VeteranoGuerra" Type="Boolean" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__Estudiante__Id__08B54D69" FromRole="Estudiante" ToRole="Persona" />
+          <NavigationProperty Name="InscripcionCarrera" Relationship="Self.FK__Inscripci__IdEst__3F115E1A" FromRole="Estudiante" ToRole="InscripcionCarrera" />
+          <NavigationProperty Name="Turno" Relationship="SAADSTJModel.FK__Estudiant__IdTur__056ECC6A" FromRole="Estudiante" ToRole="Turno" />
+        </EntityType>
+        <EntityType Name="InscripcionCarrera">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdPlanEstudio" Type="Int16" Nullable="false" />
+          <Property Name="IdEstudiante" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdTipoBeneficio" Type="Int16" />
+          <Property Name="IdSistemaEstudio" Type="Int16" />
+          <Property Name="IdTurno" Type="Int16" />
+          <Property Name="IdFormaPago" Type="Int16" />
+          <Property Name="IdTipoIngreso" Type="Int16" />
+          <Property Name="IdEstado" Type="Int16" />
+          <Property Name="IdSistemaEnsenanza" Type="Int16" />
+          <Property Name="IdTipoEstudiante" Type="Int32" />
+          <Property Name="Recargo" Type="Int32" />
+          <Property Name="NroCertificadoEgreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Regular" Type="Boolean" />
+          <Property Name="NroFolio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NroHabilitacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SemestreActual" Type="Int16" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Inscripci__IdEst__3F115E1A" FromRole="InscripcionCarrera" ToRole="Estudiante" />
+          <NavigationProperty Name="PlanEstudio" Relationship="Self.FK__Inscripci__IdPla__3E1D39E1" FromRole="InscripcionCarrera" ToRole="PlanEstudio" />
+          <NavigationProperty Name="Turno" Relationship="SAADSTJModel.FK__Inscripci__IdTur__42E1EEFE" FromRole="InscripcionCarrera" ToRole="Turno" />
+          <NavigationProperty Name="ComprobanteRegistro" Relationship="SAADSTJModel.FK__Comproban__IdIns__21D600EE" FromRole="InscripcionCarrera" ToRole="ComprobanteRegistro" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="Int16" />
+          <Property Name="DocumentoIdentidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdCiudadDocumentoIdentidad" Type="Int16" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoDomicilio" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SitioWeb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Facebook" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InstitucionTrabajo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionTrabajo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoTrabajo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdSexo" Type="Int16" />
+          <Property Name="NIT" Type="Int32" />
+          <Property Name="Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Foto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstadoCivil" Type="Int16" />
+          <Property Name="IdTipoSangre" Type="Int16" />
+          <Property Name="IdCiudad" Type="Int16" />
+          <Property Name="IdNacionalidad" Type="Int16" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TieneFoto" Type="Boolean" />
+          <Property Name="IdRN" Type="Int32" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Estudiante__Id__08B54D69" FromRole="Persona" ToRole="Estudiante" />
+        </EntityType>
+        <EntityType Name="PlanEstudio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sigla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Duracion" Type="Int16" />
+          <Property Name="IdPeriodicidad" Type="Int16" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdEstadoPlan" Type="Int16" />
+          <Property Name="IdCarrera" Type="Int16" />
+          <Property Name="CantidadMaterias" Type="Int16" />
+          <Property Name="CantidadElectivas" Type="Int16" />
+          <Property Name="TotalHorasTeoricas" Type="Int16" />
+          <Property Name="TotalHorasPracticas" Type="Int16" />
+          <Property Name="TotalHorasAutonomas" Type="Int16" />
+          <Property Name="TotalHorasTeoricasVirtuales" Type="Int16" />
+          <Property Name="TotalHorasPracticasVirtuales" Type="Int16" />
+          <Property Name="PeriodicidadInicialElectivas" Type="Byte" />
+          <Property Name="PeriodoRequeridoPractica" Type="Int32" />
+          <Property Name="ResolucionMinisterial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PanelesDeGrado" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CitePlanEstudio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAprovacion" Type="DateTime" Precision="3" />
+          <Property Name="RegimenComplementario" Type="Int32" />
+          <Property Name="HorasPracticasProfesional" Type="Int32" />
+          <Property Name="HorasMDG" Type="Int32" />
+          <Property Name="IdModeloEstudio" Type="Int32" />
+          <Property Name="IdTipoPlanEstudio" Type="Int32" />
+          <Property Name="IdSistemaEstudio" Type="Int16" />
+          <NavigationProperty Name="InscripcionCarrera" Relationship="Self.FK__Inscripci__IdPla__3E1D39E1" FromRole="PlanEstudio" ToRole="InscripcionCarrera" />
+        </EntityType>
+        <Association Name="FK__Estudiante__Id__08B54D69">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__IdEst__3F115E1A">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="InscripcionCarrera" Type="Self.InscripcionCarrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InscripcionCarrera">
+              <PropertyRef Name="IdEstudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__IdPla__3E1D39E1">
+          <End Role="PlanEstudio" Type="Self.PlanEstudio" Multiplicity="1" />
+          <End Role="InscripcionCarrera" Type="Self.InscripcionCarrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanEstudio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InscripcionCarrera">
+              <PropertyRef Name="IdPlanEstudio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SAADSTJEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Estudiante" EntityType="Self.Estudiante" />
+          <EntitySet Name="InscripcionCarrera" EntityType="Self.InscripcionCarrera" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <EntitySet Name="PlanEstudio" EntityType="Self.PlanEstudio" />
+          <AssociationSet Name="FK__Estudiante__Id__08B54D69" Association="Self.FK__Estudiante__Id__08B54D69">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__IdEst__3F115E1A" Association="Self.FK__Inscripci__IdEst__3F115E1A">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="InscripcionCarrera" EntitySet="InscripcionCarrera" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__IdPla__3E1D39E1" Association="Self.FK__Inscripci__IdPla__3E1D39E1">
+            <End Role="PlanEstudio" EntitySet="PlanEstudio" />
+            <End Role="InscripcionCarrera" EntitySet="InscripcionCarrera" />
+          </AssociationSet>
+          <EntitySet Name="GrupoAperturado" EntityType="SAADSTJModel.GrupoAperturado" />
+          <EntitySet Name="Materia" EntityType="SAADSTJModel.Materia" />
+          <EntitySet Name="MateriaContenido" EntityType="SAADSTJModel.MateriaContenido" />
+          <EntitySet Name="Oferta" EntityType="SAADSTJModel.Oferta" />
+          <EntitySet Name="OfertaSistemaEstudio" EntityType="SAADSTJModel.OfertaSistemaEstudio" />
+          <EntitySet Name="Turno" EntityType="SAADSTJModel.Turno" />
+          <AssociationSet Name="FK__Estudiant__IdTur__056ECC6A" Association="SAADSTJModel.FK__Estudiant__IdTur__056ECC6A">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GrupoAper__IdMat__73852659" Association="SAADSTJModel.FK__GrupoAper__IdMat__73852659">
+            <End Role="MateriaContenido" EntitySet="MateriaContenido" />
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GrupoAper__IdTur__74794A92" Association="SAADSTJModel.FK__GrupoAper__IdTur__74794A92">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GrupoAperturado_OfertaSistemaEstudio" Association="SAADSTJModel.FK_GrupoAperturado_OfertaSistemaEstudio">
+            <End Role="OfertaSistemaEstudio" EntitySet="OfertaSistemaEstudio" />
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__IdTur__42E1EEFE" Association="SAADSTJModel.FK__Inscripci__IdTur__42E1EEFE">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="InscripcionCarrera" EntitySet="InscripcionCarrera" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materia_MateriaContenido" Association="SAADSTJModel.FK_Materia_MateriaContenido">
+            <End Role="MateriaContenido" EntitySet="MateriaContenido" />
+            <End Role="Materia" EntitySet="Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OfertaSis__IdOfe__6442E2C9" Association="SAADSTJModel.FK__OfertaSis__IdOfe__6442E2C9">
+            <End Role="Oferta" EntitySet="Oferta" />
+            <End Role="OfertaSistemaEstudio" EntitySet="OfertaSistemaEstudio" />
+          </AssociationSet>
+          <EntitySet Name="Aula" EntityType="SAADSTJModel.Aula" />
+          <EntitySet Name="HorarioGrupo" EntityType="SAADSTJModel.HorarioGrupo" />
+          <AssociationSet Name="FK__HorarioGr__IdAul__1C5231C2" Association="SAADSTJModel.FK__HorarioGr__IdAul__1C5231C2">
+            <End Role="Aula" EntitySet="Aula" />
+            <End Role="HorarioGrupo" EntitySet="HorarioGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorarioGrupo_GrupoAperturado" Association="SAADSTJModel.FK_HorarioGrupo_GrupoAperturado">
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+            <End Role="HorarioGrupo" EntitySet="HorarioGrupo" />
+          </AssociationSet>
+          <EntitySet Name="ComprobanteRegistro" EntityType="SAADSTJModel.ComprobanteRegistro" />
+          <EntitySet Name="RegistroDeMateria" EntityType="SAADSTJModel.RegistroDeMateria" />
+          <AssociationSet Name="FK__Comproban__IdIns__21D600EE" Association="SAADSTJModel.FK__Comproban__IdIns__21D600EE">
+            <End Role="InscripcionCarrera" EntitySet="InscripcionCarrera" />
+            <End Role="ComprobanteRegistro" EntitySet="ComprobanteRegistro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RegistroD__IdCom__2AF556D4" Association="SAADSTJModel.FK__RegistroD__IdCom__2AF556D4">
+            <End Role="ComprobanteRegistro" EntitySet="ComprobanteRegistro" />
+            <End Role="RegistroDeMateria" EntitySet="RegistroDeMateria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistroDeMateria_GrupoAperturado" Association="SAADSTJModel.FK_RegistroDeMateria_GrupoAperturado">
+            <End Role="GrupoAperturado" EntitySet="GrupoAperturado" />
+            <End Role="RegistroDeMateria" EntitySet="RegistroDeMateria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistroDeMateria_Materia" Association="SAADSTJModel.FK_RegistroDeMateria_Materia">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="RegistroDeMateria" EntitySet="RegistroDeMateria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MateriaContenido_MateriaContenido" Association="SAADSTJModel.FK_MateriaContenido_MateriaContenido">
+            <End Role="MateriaContenido" EntitySet="MateriaContenido" />
+            <End Role="MateriaContenido1" EntitySet="MateriaContenido" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="GrupoAperturado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Folio" Type="Int64" />
+          <Property Name="CupoOfertado" Type="Int16" Nullable="false" />
+          <Property Name="IdOferta" Type="Int16" Nullable="false" />
+          <Property Name="IdMateriaContenido" Type="Int16" Nullable="false" />
+          <Property Name="IdTurno" Type="Int16" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdSistemaEstudio" Type="Int16" Nullable="false" />
+          <Property Name="IdEstadoGrupo" Type="Int16" Nullable="false" />
+          <Property Name="IdDocente" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoEvaluacion" Type="Int16" Nullable="false" />
+          <Property Name="IdTipoGrupoAperturado" Type="Int32" Nullable="false" />
+          <Property Name="CostoMateria" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="IdDescripcionGrupo" Type="Int16" Nullable="false" />
+          <Property Name="IdGrupoAperturadoMaestro" Type="Int64" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="MateriaNombre" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="MateriaSigla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CargaHoraria" Type="Int32" />
+          <Property Name="Horario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Credito" Type="Int32" />
+          <Property Name="CupoDisponible" Type="Int32" />
+          <NavigationProperty Name="MateriaContenido" Relationship="SAADSTJModel.FK__GrupoAper__IdMat__73852659" FromRole="GrupoAperturado" ToRole="MateriaContenido" />
+          <NavigationProperty Name="Turno" Relationship="SAADSTJModel.FK__GrupoAper__IdTur__74794A92" FromRole="GrupoAperturado" ToRole="Turno" />
+          <NavigationProperty Name="OfertaSistemaEstudio" Relationship="SAADSTJModel.FK_GrupoAperturado_OfertaSistemaEstudio" FromRole="GrupoAperturado" ToRole="OfertaSistemaEstudio" />
+          <NavigationProperty Name="HorarioGrupo" Relationship="SAADSTJModel.FK_HorarioGrupo_GrupoAperturado" FromRole="GrupoAperturado" ToRole="HorarioGrupo" />
+          <NavigationProperty Name="RegistroDeMateria" Relationship="SAADSTJModel.FK_RegistroDeMateria_GrupoAperturado" FromRole="GrupoAperturado" ToRole="RegistroDeMateria" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Sigla" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstado" Type="Int16" Nullable="false" />
+          <Property Name="IdMateriaContenido" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="MateriaContenido" Relationship="SAADSTJModel.FK_Materia_MateriaContenido" FromRole="Materia" ToRole="MateriaContenido" />
+          <NavigationProperty Name="RegistroDeMateria" Relationship="SAADSTJModel.FK_RegistroDeMateria_Materia" FromRole="Materia" ToRole="RegistroDeMateria" />
+        </EntityType>
+        <EntityType Name="MateriaContenido">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" />
+          <Property Name="Sigla" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdDireccionArea" Type="Int16" />
+          <Property Name="IdEstado" Type="Int16" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Creditos" Type="Int16" />
+          <Property Name="HorasTeoricasSemanal" Type="Int16" />
+          <Property Name="HorasPracticasSemanal" Type="Int16" />
+          <Property Name="TotalHoras" Type="Int16" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="IdModeloEstudio" Type="Int32" Nullable="false" />
+          <Property Name="Competencia" Type="String" MaxLength="900" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoMateriaContenido" Type="Int32" />
+          <Property Name="UrlPrograma" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="CantidadModulo" Type="Int32" />
+          <Property Name="GrupoAcademicoId" Type="Int16" />
+          <NavigationProperty Name="GrupoAperturado" Relationship="SAADSTJModel.FK__GrupoAper__IdMat__73852659" FromRole="MateriaContenido" ToRole="GrupoAperturado" />
+          <NavigationProperty Name="Materia" Relationship="SAADSTJModel.FK_Materia_MateriaContenido" FromRole="MateriaContenido" ToRole="Materia" />
+          <Property Name="MateriaContenidoPadreId" Type="Int16" />
+          <Property Name="IdiomaId" Type="Int16" />
+          <NavigationProperty Name="MateriaContenido1" Relationship="SAADSTJModel.FK_MateriaContenido_MateriaContenido" FromRole="MateriaContenido" ToRole="MateriaContenido1" />
+          <NavigationProperty Name="MateriaContenido2" Relationship="SAADSTJModel.FK_MateriaContenido_MateriaContenido" FromRole="MateriaContenido1" ToRole="MateriaContenido" />
+        </EntityType>
+        <EntityType Name="Oferta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" />
+          <Property Name="IdGestion" Type="Int16" Nullable="false" />
+          <Property Name="NumeroPeriodo" Type="Int16" Nullable="false" />
+          <Property Name="NroOfertaPeriodo" Type="Int16" Nullable="false" />
+          <Property Name="IdGrupoAcademico" Type="Int16" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdSistemaEnsenanza" Type="Int16" Nullable="false" />
+          <Property Name="IdEstadoOferta" Type="Int16" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="NroOrden" Type="Int16" />
+          <Property Name="IdSede" Type="Int16" />
+          <Property Name="IdMoodleCategoria" Type="Int32" />
+          <NavigationProperty Name="OfertaSistemaEstudio" Relationship="SAADSTJModel.FK__OfertaSis__IdOfe__6442E2C9" FromRole="Oferta" ToRole="OfertaSistemaEstudio" />
+        </EntityType>
+        <EntityType Name="OfertaSistemaEstudio">
+          <Key>
+            <PropertyRef Name="IdOferta" />
+            <PropertyRef Name="IdSistemaEstudio" />
+          </Key>
+          <Property Name="IdOferta" Type="Int16" Nullable="false" />
+          <Property Name="IdSistemaEstudio" Type="Int16" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaLimitePago" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaLimiteInscripcion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaExamenParcial" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="GrupoAperturado" Relationship="SAADSTJModel.FK_GrupoAperturado_OfertaSistemaEstudio" FromRole="OfertaSistemaEstudio" ToRole="GrupoAperturado" />
+          <NavigationProperty Name="Oferta" Relationship="SAADSTJModel.FK__OfertaSis__IdOfe__6442E2C9" FromRole="OfertaSistemaEstudio" ToRole="Oferta" />
+        </EntityType>
+        <EntityType Name="Turno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionHorario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estudiante" Relationship="SAADSTJModel.FK__Estudiant__IdTur__056ECC6A" FromRole="Turno" ToRole="Estudiante" />
+          <NavigationProperty Name="GrupoAperturado" Relationship="SAADSTJModel.FK__GrupoAper__IdTur__74794A92" FromRole="Turno" ToRole="GrupoAperturado" />
+          <NavigationProperty Name="InscripcionCarrera" Relationship="SAADSTJModel.FK__Inscripci__IdTur__42E1EEFE" FromRole="Turno" ToRole="InscripcionCarrera" />
+        </EntityType>
+        <Association Name="FK__Estudiant__IdTur__056ECC6A">
+          <End Type="SAADSTJModel.Turno" Role="Turno" Multiplicity="0..1" />
+          <End Type="SAADSTJModel.Estudiante" Role="Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="IdTurnoBachiller" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GrupoAper__IdMat__73852659">
+          <End Type="SAADSTJModel.MateriaContenido" Role="MateriaContenido" Multiplicity="1" />
+          <End Type="SAADSTJModel.GrupoAperturado" Role="GrupoAperturado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MateriaContenido">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GrupoAperturado">
+              <PropertyRef Name="IdMateriaContenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GrupoAper__IdTur__74794A92">
+          <End Type="SAADSTJModel.Turno" Role="Turno" Multiplicity="1" />
+          <End Type="SAADSTJModel.GrupoAperturado" Role="GrupoAperturado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GrupoAperturado">
+              <PropertyRef Name="IdTurno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GrupoAperturado_OfertaSistemaEstudio">
+          <End Type="SAADSTJModel.OfertaSistemaEstudio" Role="OfertaSistemaEstudio" Multiplicity="1" />
+          <End Type="SAADSTJModel.GrupoAperturado" Role="GrupoAperturado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfertaSistemaEstudio">
+              <PropertyRef Name="IdOferta" />
+              <PropertyRef Name="IdSistemaEstudio" />
+            </Principal>
+            <Dependent Role="GrupoAperturado">
+              <PropertyRef Name="IdOferta" />
+              <PropertyRef Name="IdSistemaEstudio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__IdTur__42E1EEFE">
+          <End Type="SAADSTJModel.Turno" Role="Turno" Multiplicity="0..1" />
+          <End Type="SAADSTJModel.InscripcionCarrera" Role="InscripcionCarrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InscripcionCarrera">
+              <PropertyRef Name="IdTurno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materia_MateriaContenido">
+          <End Type="SAADSTJModel.MateriaContenido" Role="MateriaContenido" Multiplicity="1" />
+          <End Type="SAADSTJModel.Materia" Role="Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MateriaContenido">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Materia">
+              <PropertyRef Name="IdMateriaContenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OfertaSis__IdOfe__6442E2C9">
+          <End Type="SAADSTJModel.Oferta" Role="Oferta" Multiplicity="1" />
+          <End Type="SAADSTJModel.OfertaSistemaEstudio" Role="OfertaSistemaEstudio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oferta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OfertaSistemaEstudio">
+              <PropertyRef Name="IdOferta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Aula">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstado" Type="Int16" />
+          <Property Name="IdTipoAula" Type="Int16" />
+          <Property Name="CapacidadAlumno" Type="Int16" />
+          <Property Name="CapacidadMaxima" Type="Int16" />
+          <NavigationProperty Name="HorarioGrupo" Relationship="SAADSTJModel.FK__HorarioGr__IdAul__1C5231C2" FromRole="Aula" ToRole="HorarioGrupo" />
+        </EntityType>
+        <EntityType Name="HorarioGrupo">
+          <Key>
+            <PropertyRef Name="IdGrupoAperturado" />
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="IdGrupoAperturado" Type="Int64" Nullable="false" />
+          <Property Name="Numero" Type="Int16" Nullable="false" />
+          <Property Name="IdAula" Type="Int16" Nullable="false" />
+          <Property Name="IdDia" Type="Int16" Nullable="false" />
+          <Property Name="HoraInicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HoraFin" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Aula" Relationship="SAADSTJModel.FK__HorarioGr__IdAul__1C5231C2" FromRole="HorarioGrupo" ToRole="Aula" />
+          <NavigationProperty Name="GrupoAperturado" Relationship="SAADSTJModel.FK_HorarioGrupo_GrupoAperturado" FromRole="HorarioGrupo" ToRole="GrupoAperturado" />
+        </EntityType>
+        <Association Name="FK__HorarioGr__IdAul__1C5231C2">
+          <End Type="SAADSTJModel.Aula" Role="Aula" Multiplicity="1" />
+          <End Type="SAADSTJModel.HorarioGrupo" Role="HorarioGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aula">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HorarioGrupo">
+              <PropertyRef Name="IdAula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorarioGrupo_GrupoAperturado">
+          <End Type="SAADSTJModel.GrupoAperturado" Role="GrupoAperturado" Multiplicity="1" />
+          <End Type="SAADSTJModel.HorarioGrupo" Role="HorarioGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoAperturado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HorarioGrupo">
+              <PropertyRef Name="IdGrupoAperturado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ComprobanteRegistro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Precision="3" />
+          <Property Name="IdInscripcionCarrera" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdEstado" Type="Int16" Nullable="false" />
+          <Property Name="IdMotivoRegistroEspecial" Type="Int16" />
+          <NavigationProperty Name="InscripcionCarrera" Relationship="SAADSTJModel.FK__Comproban__IdIns__21D600EE" FromRole="ComprobanteRegistro" ToRole="InscripcionCarrera" />
+          <NavigationProperty Name="RegistroDeMateria" Relationship="SAADSTJModel.FK__RegistroD__IdCom__2AF556D4" FromRole="ComprobanteRegistro" ToRole="RegistroDeMateria" />
+        </EntityType>
+        <EntityType Name="RegistroDeMateria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="IdGrupoAperturado" Type="Int64" Nullable="false" />
+          <Property Name="IdEstadoMateriaRegistrada" Type="Int16" Nullable="false" />
+          <Property Name="IdComprobanteRegistro" Type="Int64" Nullable="false" />
+          <Property Name="ItemRecibo" Type="Int16" />
+          <Property Name="NumeroRecibo" Type="Int64" />
+          <Property Name="PorcentajeBeca" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Nota" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdBeca" Type="Int32" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdMateria" Type="Int32" Nullable="false" />
+          <Property Name="IdPlanEstudio" Type="Int16" />
+          <Property Name="IdValidezDetalleRecibo" Type="Int64" />
+          <Property Name="IdNivelDominioCompetencia" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
+          <Property Name="IdSolicitudRegistroEspecial" Type="Int64" />
+          <NavigationProperty Name="ComprobanteRegistro" Relationship="SAADSTJModel.FK__RegistroD__IdCom__2AF556D4" FromRole="RegistroDeMateria" ToRole="ComprobanteRegistro" />
+          <NavigationProperty Name="GrupoAperturado" Relationship="SAADSTJModel.FK_RegistroDeMateria_GrupoAperturado" FromRole="RegistroDeMateria" ToRole="GrupoAperturado" />
+          <NavigationProperty Name="Materia" Relationship="SAADSTJModel.FK_RegistroDeMateria_Materia" FromRole="RegistroDeMateria" ToRole="Materia" />
+        </EntityType>
+        <Association Name="FK__Comproban__IdIns__21D600EE">
+          <End Type="SAADSTJModel.InscripcionCarrera" Role="InscripcionCarrera" Multiplicity="0..1" />
+          <End Type="SAADSTJModel.ComprobanteRegistro" Role="ComprobanteRegistro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InscripcionCarrera">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComprobanteRegistro">
+              <PropertyRef Name="IdInscripcionCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RegistroD__IdCom__2AF556D4">
+          <End Type="SAADSTJModel.ComprobanteRegistro" Role="ComprobanteRegistro" Multiplicity="1" />
+          <End Type="SAADSTJModel.RegistroDeMateria" Role="RegistroDeMateria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComprobanteRegistro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistroDeMateria">
+              <PropertyRef Name="IdComprobanteRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistroDeMateria_GrupoAperturado">
+          <End Type="SAADSTJModel.GrupoAperturado" Role="GrupoAperturado" Multiplicity="1" />
+          <End Type="SAADSTJModel.RegistroDeMateria" Role="RegistroDeMateria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoAperturado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistroDeMateria">
+              <PropertyRef Name="IdGrupoAperturado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistroDeMateria_Materia">
+          <End Type="SAADSTJModel.Materia" Role="Materia" Multiplicity="1" />
+          <End Type="SAADSTJModel.RegistroDeMateria" Role="RegistroDeMateria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistroDeMateria">
+              <PropertyRef Name="IdMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MateriaContenido_MateriaContenido">
+          <End Type="SAADSTJModel.MateriaContenido" Role="MateriaContenido" Multiplicity="0..1" />
+          <End Type="SAADSTJModel.MateriaContenido" Role="MateriaContenido1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MateriaContenido">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MateriaContenido1">
+              <PropertyRef Name="MateriaContenidoPadreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SAADSTJModelStoreContainer" CdmEntityContainer="SAADSTJEntities">
+          <EntitySetMapping Name="Estudiante">
+            <EntityTypeMapping TypeName="SAADSTJModel.Estudiante">
+              <MappingFragment StoreEntitySet="Estudiante">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AnioEgresoBachiller" ColumnName="AnioEgresoBachiller" />
+                <ScalarProperty Name="NroTitulo" ColumnName="NroTitulo" />
+                <ScalarProperty Name="NroFolio" ColumnName="NroFolio" />
+                <ScalarProperty Name="NroFolioPostGrado" ColumnName="NroFolioPostGrado" />
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdColegio" ColumnName="IdColegio" />
+                <ScalarProperty Name="IdTutor" ColumnName="IdTutor" />
+                <ScalarProperty Name="IdCondicionLaboral" ColumnName="IdCondicionLaboral" />
+                <ScalarProperty Name="IdTurnoBachiller" ColumnName="IdTurnoBachiller" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdParentesco" ColumnName="IdParentesco" />
+                <ScalarProperty Name="FechaTituloBachiller" ColumnName="FechaTituloBachiller" />
+                <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
+                <ScalarProperty Name="IdGrupoDocumento" ColumnName="IdGrupoDocumento" />
+                <ScalarProperty Name="PersonaReferencia" ColumnName="PersonaReferencia" />
+                <ScalarProperty Name="TelefonoReferencia" ColumnName="TelefonoReferencia" />
+                <ScalarProperty Name="IdIdiomaMaterno" ColumnName="IdIdiomaMaterno" />
+                <ScalarProperty Name="Discapacidad" ColumnName="Discapacidad" />
+                <ScalarProperty Name="IdMoodleUsuario" ColumnName="IdMoodleUsuario" />
+                <ScalarProperty Name="EmailOffice365" ColumnName="EmailOffice365" />
+                <ScalarProperty Name="VeteranoGuerra" ColumnName="VeteranoGuerra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InscripcionCarrera">
+            <EntityTypeMapping TypeName="SAADSTJModel.InscripcionCarrera">
+              <MappingFragment StoreEntitySet="InscripcionCarrera">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdPlanEstudio" ColumnName="IdPlanEstudio" />
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTipoBeneficio" ColumnName="IdTipoBeneficio" />
+                <ScalarProperty Name="IdSistemaEstudio" ColumnName="IdSistemaEstudio" />
+                <ScalarProperty Name="IdTurno" ColumnName="IdTurno" />
+                <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
+                <ScalarProperty Name="IdTipoIngreso" ColumnName="IdTipoIngreso" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="IdSistemaEnsenanza" ColumnName="IdSistemaEnsenanza" />
+                <ScalarProperty Name="IdTipoEstudiante" ColumnName="IdTipoEstudiante" />
+                <ScalarProperty Name="Recargo" ColumnName="Recargo" />
+                <ScalarProperty Name="NroCertificadoEgreso" ColumnName="NroCertificadoEgreso" />
+                <ScalarProperty Name="Regular" ColumnName="Regular" />
+                <ScalarProperty Name="NroFolio" ColumnName="NroFolio" />
+                <ScalarProperty Name="NroHabilitacion" ColumnName="NroHabilitacion" />
+                <ScalarProperty Name="SemestreActual" ColumnName="SemestreActual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="SAADSTJModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="DocumentoIdentidad" ColumnName="DocumentoIdentidad" />
+                <ScalarProperty Name="IdCiudadDocumentoIdentidad" ColumnName="IdCiudadDocumentoIdentidad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="TelefonoDomicilio" ColumnName="TelefonoDomicilio" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="SitioWeb" ColumnName="SitioWeb" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="InstitucionTrabajo" ColumnName="InstitucionTrabajo" />
+                <ScalarProperty Name="DireccionTrabajo" ColumnName="DireccionTrabajo" />
+                <ScalarProperty Name="TelefonoTrabajo" ColumnName="TelefonoTrabajo" />
+                <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
+                <ScalarProperty Name="NIT" ColumnName="NIT" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
+                <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="IdNacionalidad" ColumnName="IdNacionalidad" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="TieneFoto" ColumnName="TieneFoto" />
+                <ScalarProperty Name="IdRN" ColumnName="IdRN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanEstudio">
+            <EntityTypeMapping TypeName="SAADSTJModel.PlanEstudio">
+              <MappingFragment StoreEntitySet="PlanEstudio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="IdPeriodicidad" ColumnName="IdPeriodicidad" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdEstadoPlan" ColumnName="IdEstadoPlan" />
+                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+                <ScalarProperty Name="CantidadMaterias" ColumnName="CantidadMaterias" />
+                <ScalarProperty Name="CantidadElectivas" ColumnName="CantidadElectivas" />
+                <ScalarProperty Name="TotalHorasTeoricas" ColumnName="TotalHorasTeoricas" />
+                <ScalarProperty Name="TotalHorasPracticas" ColumnName="TotalHorasPracticas" />
+                <ScalarProperty Name="TotalHorasAutonomas" ColumnName="TotalHorasAutonomas" />
+                <ScalarProperty Name="TotalHorasTeoricasVirtuales" ColumnName="TotalHorasTeoricasVirtuales" />
+                <ScalarProperty Name="TotalHorasPracticasVirtuales" ColumnName="TotalHorasPracticasVirtuales" />
+                <ScalarProperty Name="PeriodicidadInicialElectivas" ColumnName="PeriodicidadInicialElectivas" />
+                <ScalarProperty Name="PeriodoRequeridoPractica" ColumnName="PeriodoRequeridoPractica" />
+                <ScalarProperty Name="ResolucionMinisterial" ColumnName="ResolucionMinisterial" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="PanelesDeGrado" ColumnName="PanelesDeGrado" />
+                <ScalarProperty Name="CitePlanEstudio" ColumnName="CitePlanEstudio" />
+                <ScalarProperty Name="fechaAprovacion" ColumnName="fechaAprovacion" />
+                <ScalarProperty Name="RegimenComplementario" ColumnName="RegimenComplementario" />
+                <ScalarProperty Name="HorasPracticasProfesional" ColumnName="HorasPracticasProfesional" />
+                <ScalarProperty Name="HorasMDG" ColumnName="HorasMDG" />
+                <ScalarProperty Name="IdModeloEstudio" ColumnName="IdModeloEstudio" />
+                <ScalarProperty Name="IdTipoPlanEstudio" ColumnName="IdTipoPlanEstudio" />
+                <ScalarProperty Name="IdSistemaEstudio" ColumnName="IdSistemaEstudio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupoAperturado">
+            <EntityTypeMapping TypeName="SAADSTJModel.GrupoAperturado">
+              <MappingFragment StoreEntitySet="GrupoAperturado">
+                <ScalarProperty Name="CupoDisponible" ColumnName="CupoDisponible" />
+                <ScalarProperty Name="Credito" ColumnName="Credito" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="CargaHoraria" ColumnName="CargaHoraria" />
+                <ScalarProperty Name="MateriaSigla" ColumnName="MateriaSigla" />
+                <ScalarProperty Name="MateriaNombre" ColumnName="MateriaNombre" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdGrupoAperturadoMaestro" ColumnName="IdGrupoAperturadoMaestro" />
+                <ScalarProperty Name="IdDescripcionGrupo" ColumnName="IdDescripcionGrupo" />
+                <ScalarProperty Name="CostoMateria" ColumnName="CostoMateria" />
+                <ScalarProperty Name="IdTipoGrupoAperturado" ColumnName="IdTipoGrupoAperturado" />
+                <ScalarProperty Name="IdTipoEvaluacion" ColumnName="IdTipoEvaluacion" />
+                <ScalarProperty Name="IdDocente" ColumnName="IdDocente" />
+                <ScalarProperty Name="IdEstadoGrupo" ColumnName="IdEstadoGrupo" />
+                <ScalarProperty Name="IdSistemaEstudio" ColumnName="IdSistemaEstudio" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTurno" ColumnName="IdTurno" />
+                <ScalarProperty Name="IdMateriaContenido" ColumnName="IdMateriaContenido" />
+                <ScalarProperty Name="IdOferta" ColumnName="IdOferta" />
+                <ScalarProperty Name="CupoOfertado" ColumnName="CupoOfertado" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materia">
+            <EntityTypeMapping TypeName="SAADSTJModel.Materia">
+              <MappingFragment StoreEntitySet="Materia">
+                <ScalarProperty Name="IdMateriaContenido" ColumnName="IdMateriaContenido" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MateriaContenido">
+            <EntityTypeMapping TypeName="SAADSTJModel.MateriaContenido">
+              <MappingFragment StoreEntitySet="MateriaContenido">
+                <ScalarProperty Name="IdiomaId" ColumnName="IdiomaId" />
+                <ScalarProperty Name="MateriaContenidoPadreId" ColumnName="MateriaContenidoPadreId" />
+                <ScalarProperty Name="GrupoAcademicoId" ColumnName="GrupoAcademicoId" />
+                <ScalarProperty Name="CantidadModulo" ColumnName="CantidadModulo" />
+                <ScalarProperty Name="UrlPrograma" ColumnName="UrlPrograma" />
+                <ScalarProperty Name="IdTipoMateriaContenido" ColumnName="IdTipoMateriaContenido" />
+                <ScalarProperty Name="Competencia" ColumnName="Competencia" />
+                <ScalarProperty Name="IdModeloEstudio" ColumnName="IdModeloEstudio" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="TotalHoras" ColumnName="TotalHoras" />
+                <ScalarProperty Name="HorasPracticasSemanal" ColumnName="HorasPracticasSemanal" />
+                <ScalarProperty Name="HorasTeoricasSemanal" ColumnName="HorasTeoricasSemanal" />
+                <ScalarProperty Name="Creditos" ColumnName="Creditos" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="IdDireccionArea" ColumnName="IdDireccionArea" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oferta">
+            <EntityTypeMapping TypeName="SAADSTJModel.Oferta">
+              <MappingFragment StoreEntitySet="Oferta">
+                <ScalarProperty Name="IdMoodleCategoria" ColumnName="IdMoodleCategoria" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="NroOrden" ColumnName="NroOrden" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdEstadoOferta" ColumnName="IdEstadoOferta" />
+                <ScalarProperty Name="IdSistemaEnsenanza" ColumnName="IdSistemaEnsenanza" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdGrupoAcademico" ColumnName="IdGrupoAcademico" />
+                <ScalarProperty Name="NroOfertaPeriodo" ColumnName="NroOfertaPeriodo" />
+                <ScalarProperty Name="NumeroPeriodo" ColumnName="NumeroPeriodo" />
+                <ScalarProperty Name="IdGestion" ColumnName="IdGestion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfertaSistemaEstudio">
+            <EntityTypeMapping TypeName="SAADSTJModel.OfertaSistemaEstudio">
+              <MappingFragment StoreEntitySet="OfertaSistemaEstudio">
+                <ScalarProperty Name="FechaExamenParcial" ColumnName="FechaExamenParcial" />
+                <ScalarProperty Name="FechaLimiteInscripcion" ColumnName="FechaLimiteInscripcion" />
+                <ScalarProperty Name="FechaLimitePago" ColumnName="FechaLimitePago" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdSistemaEstudio" ColumnName="IdSistemaEstudio" />
+                <ScalarProperty Name="IdOferta" ColumnName="IdOferta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Turno">
+            <EntityTypeMapping TypeName="SAADSTJModel.Turno">
+              <MappingFragment StoreEntitySet="Turno">
+                <ScalarProperty Name="DescripcionHorario" ColumnName="DescripcionHorario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aula">
+            <EntityTypeMapping TypeName="SAADSTJModel.Aula">
+              <MappingFragment StoreEntitySet="Aula">
+                <ScalarProperty Name="CapacidadMaxima" ColumnName="CapacidadMaxima" />
+                <ScalarProperty Name="CapacidadAlumno" ColumnName="CapacidadAlumno" />
+                <ScalarProperty Name="IdTipoAula" ColumnName="IdTipoAula" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HorarioGrupo">
+            <EntityTypeMapping TypeName="SAADSTJModel.HorarioGrupo">
+              <MappingFragment StoreEntitySet="HorarioGrupo">
+                <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+                <ScalarProperty Name="IdDia" ColumnName="IdDia" />
+                <ScalarProperty Name="IdAula" ColumnName="IdAula" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="IdGrupoAperturado" ColumnName="IdGrupoAperturado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComprobanteRegistro">
+            <EntityTypeMapping TypeName="SAADSTJModel.ComprobanteRegistro">
+              <MappingFragment StoreEntitySet="ComprobanteRegistro">
+                <ScalarProperty Name="IdMotivoRegistroEspecial" ColumnName="IdMotivoRegistroEspecial" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdInscripcionCarrera" ColumnName="IdInscripcionCarrera" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistroDeMateria">
+            <EntityTypeMapping TypeName="SAADSTJModel.RegistroDeMateria">
+              <MappingFragment StoreEntitySet="RegistroDeMateria">
+                <ScalarProperty Name="IdSolicitudRegistroEspecial" ColumnName="IdSolicitudRegistroEspecial" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdNivelDominioCompetencia" ColumnName="IdNivelDominioCompetencia" />
+                <ScalarProperty Name="IdValidezDetalleRecibo" ColumnName="IdValidezDetalleRecibo" />
+                <ScalarProperty Name="IdPlanEstudio" ColumnName="IdPlanEstudio" />
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="IdBeca" ColumnName="IdBeca" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />
+                <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
+                <ScalarProperty Name="ItemRecibo" ColumnName="ItemRecibo" />
+                <ScalarProperty Name="IdComprobanteRegistro" ColumnName="IdComprobanteRegistro" />
+                <ScalarProperty Name="IdEstadoMateriaRegistrada" ColumnName="IdEstadoMateriaRegistrada" />
+                <ScalarProperty Name="IdGrupoAperturado" ColumnName="IdGrupoAperturado" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SAADSTJModelStoreContainer" CdmEntityContainer="SAADSTJEntities">
+    <EntitySetMapping Name="Estudiante">
+      <EntityTypeMapping TypeName="SAADSTJModel.Estudiante">
+        <MappingFragment StoreEntitySet="Estudiante">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AnioEgresoBachiller" ColumnName="AnioEgresoBachiller" />
+          <ScalarProperty Name="NroTitulo" ColumnName="NroTitulo" />
+          <ScalarProperty Name="NroFolio" ColumnName="NroFolio" />
+          <ScalarProperty Name="NroFolioPostGrado" ColumnName="NroFolioPostGrado" />
+          <ScalarProperty Name="Pin" ColumnName="Pin" />
+          <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+          <ScalarProperty Name="IdColegio" ColumnName="IdColegio" />
+          <ScalarProperty Name="IdTutor" ColumnName="IdTutor" />
+          <ScalarProperty Name="IdCondicionLaboral" ColumnName="IdCondicionLaboral" />
+          <ScalarProperty Name="IdTurnoBachiller" ColumnName="IdTurnoBachiller" />
+          <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+          <ScalarProperty Name="IdParentesco" ColumnName="IdParentesco" />
+          <ScalarProperty Name="FechaTituloBachiller" ColumnName="FechaTituloBachiller" />
+          <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
+          <ScalarProperty Name="IdGrupoDocumento" ColumnName="IdGrupoDocumento" />
+          <ScalarProperty Name="PersonaReferencia" ColumnName="PersonaReferencia" />
+          <ScalarProperty Name="TelefonoReferencia" ColumnName="TelefonoReferencia" />
+          <ScalarProperty Name="IdIdiomaMaterno" ColumnName="IdIdiomaMaterno" />
+          <ScalarProperty Name="Discapacidad" ColumnName="Discapacidad" />
+          <ScalarProperty Name="IdMoodleUsuario" ColumnName="IdMoodleUsuario" />
+          <ScalarProperty Name="EmailOffice365" ColumnName="EmailOffice365" />
+          <ScalarProperty Name="VeteranoGuerra" ColumnName="VeteranoGuerra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InscripcionCarrera">
+      <EntityTypeMapping TypeName="SAADSTJModel.InscripcionCarrera">
+        <MappingFragment StoreEntitySet="InscripcionCarrera">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdPlanEstudio" ColumnName="IdPlanEstudio" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdTipoBeneficio" ColumnName="IdTipoBeneficio" />
+          <ScalarProperty Name="IdSistemaEstudio" ColumnName="IdSistemaEstudio" />
+          <ScalarProperty Name="IdTurno" ColumnName="IdTurno" />
+          <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
+          <ScalarProperty Name="IdTipoIngreso" ColumnName="IdTipoIngreso" />
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="IdSistemaEnsenanza" ColumnName="IdSistemaEnsenanza" />
+          <ScalarProperty Name="IdTipoEstudiante" ColumnName="IdTipoEstudiante" />
+          <ScalarProperty Name="Recargo" ColumnName="Recargo" />
+          <ScalarProperty Name="NroCertificadoEgreso" ColumnName="NroCertificadoEgreso" />
+          <ScalarProperty Name="Regular" ColumnName="Regular" />
+          <ScalarProperty Name="NroFolio" ColumnName="NroFolio" />
+          <ScalarProperty Name="NroHabilitacion" ColumnName="NroHabilitacion" />
+          <ScalarProperty Name="SemestreActual" ColumnName="SemestreActual" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persona">
+      <EntityTypeMapping TypeName="SAADSTJModel.Persona">
+        <MappingFragment StoreEntitySet="Persona">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+          <ScalarProperty Name="DocumentoIdentidad" ColumnName="DocumentoIdentidad" />
+          <ScalarProperty Name="IdCiudadDocumentoIdentidad" ColumnName="IdCiudadDocumentoIdentidad" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="TelefonoDomicilio" ColumnName="TelefonoDomicilio" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Email1" ColumnName="Email1" />
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="SitioWeb" ColumnName="SitioWeb" />
+          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+          <ScalarProperty Name="InstitucionTrabajo" ColumnName="InstitucionTrabajo" />
+          <ScalarProperty Name="DireccionTrabajo" ColumnName="DireccionTrabajo" />
+          <ScalarProperty Name="TelefonoTrabajo" ColumnName="TelefonoTrabajo" />
+          <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
+          <ScalarProperty Name="NIT" ColumnName="NIT" />
+          <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
+          <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="IdNacionalidad" ColumnName="IdNacionalidad" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="TieneFoto" ColumnName="TieneFoto" />
+          <ScalarProperty Name="IdRN" ColumnName="IdRN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlanEstudio">
+      <EntityTypeMapping TypeName="SAADSTJModel.PlanEstudio">
+        <MappingFragment StoreEntitySet="PlanEstudio">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+          <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+          <ScalarProperty Name="IdPeriodicidad" ColumnName="IdPeriodicidad" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="IdEstadoPlan" ColumnName="IdEstadoPlan" />
+          <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+          <ScalarProperty Name="CantidadMaterias" ColumnName="CantidadMaterias" />
+          <ScalarProperty Name="CantidadElectivas" ColumnName="CantidadElectivas" />
+          <ScalarProperty Name="TotalHorasTeoricas" ColumnName="TotalHorasTeoricas" />
+          <ScalarProperty Name="TotalHorasPracticas" ColumnName="TotalHorasPracticas" />
+          <ScalarProperty Name="TotalHorasAutonomas" ColumnName="TotalHorasAutonomas" />
+          <ScalarProperty Name="TotalHorasTeoricasVirtuales" ColumnName="TotalHorasTeoricasVirtuales" />
+          <ScalarProperty Name="TotalHorasPracticasVirtuales" ColumnName="TotalHorasPracticasVirtuales" />
+          <ScalarProperty Name="PeriodicidadInicialElectivas" ColumnName="PeriodicidadInicialElectivas" />
+          <ScalarProperty Name="PeriodoRequeridoPractica" ColumnName="PeriodoRequeridoPractica" />
+          <ScalarProperty Name="ResolucionMinisterial" ColumnName="ResolucionMinisterial" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="PanelesDeGrado" ColumnName="PanelesDeGrado" />
+          <ScalarProperty Name="CitePlanEstudio" ColumnName="CitePlanEstudio" />
+          <ScalarProperty Name="fechaAprovacion" ColumnName="fechaAprovacion" />
+          <ScalarProperty Name="RegimenComplementario" ColumnName="RegimenComplementario" />
+          <ScalarProperty Name="HorasPracticasProfesional" ColumnName="HorasPracticasProfesional" />
+          <ScalarProperty Name="HorasMDG" ColumnName="HorasMDG" />
+          <ScalarProperty Name="IdModeloEstudio" ColumnName="IdModeloEstudio" />
+          <ScalarProperty Name="IdTipoPlanEstudio" ColumnName="IdTipoPlanEstudio" />
+          <ScalarProperty Name="IdSistemaEstudio" ColumnName="IdSistemaEstudio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupoAperturado">
+      <EntityTypeMapping TypeName="SAADSTJModel.GrupoAperturado">
+        <MappingFragment StoreEntitySet="GrupoAperturado">
+          <ScalarProperty Name="CupoDisponible" ColumnName="CupoDisponible" />
+          <ScalarProperty Name="Credito" ColumnName="Credito" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="CargaHoraria" ColumnName="CargaHoraria" />
+          <ScalarProperty Name="MateriaSigla" ColumnName="MateriaSigla" />
+          <ScalarProperty Name="MateriaNombre" ColumnName="MateriaNombre" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="IdGrupoAperturadoMaestro" ColumnName="IdGrupoAperturadoMaestro" />
+          <ScalarProperty Name="IdDescripcionGrupo" ColumnName="IdDescripcionGrupo" />
+          <ScalarProperty Name="CostoMateria" ColumnName="CostoMateria" />
+          <ScalarProperty Name="IdTipoGrupoAperturado" ColumnName="IdTipoGrupoAperturado" />
+          <ScalarProperty Name="IdTipoEvaluacion" ColumnName="IdTipoEvaluacion" />
+          <ScalarProperty Name="IdDocente" ColumnName="IdDocente" />
+          <ScalarProperty Name="IdEstadoGrupo" ColumnName="IdEstadoGrupo" />
+          <ScalarProperty Name="IdSistemaEstudio" ColumnName="IdSistemaEstudio" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdTurno" ColumnName="IdTurno" />
+          <ScalarProperty Name="IdMateriaContenido" ColumnName="IdMateriaContenido" />
+          <ScalarProperty Name="IdOferta" ColumnName="IdOferta" />
+          <ScalarProperty Name="CupoOfertado" ColumnName="CupoOfertado" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materia">
+      <EntityTypeMapping TypeName="SAADSTJModel.Materia">
+        <MappingFragment StoreEntitySet="Materia">
+          <ScalarProperty Name="IdMateriaContenido" ColumnName="IdMateriaContenido" />
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MateriaContenido">
+      <EntityTypeMapping TypeName="SAADSTJModel.MateriaContenido">
+        <MappingFragment StoreEntitySet="MateriaContenido">
+          <ScalarProperty Name="IdiomaId" ColumnName="IdiomaId" />
+          <ScalarProperty Name="MateriaContenidoPadreId" ColumnName="MateriaContenidoPadreId" />
+          <ScalarProperty Name="GrupoAcademicoId" ColumnName="GrupoAcademicoId" />
+          <ScalarProperty Name="CantidadModulo" ColumnName="CantidadModulo" />
+          <ScalarProperty Name="UrlPrograma" ColumnName="UrlPrograma" />
+          <ScalarProperty Name="IdTipoMateriaContenido" ColumnName="IdTipoMateriaContenido" />
+          <ScalarProperty Name="Competencia" ColumnName="Competencia" />
+          <ScalarProperty Name="IdModeloEstudio" ColumnName="IdModeloEstudio" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="TotalHoras" ColumnName="TotalHoras" />
+          <ScalarProperty Name="HorasPracticasSemanal" ColumnName="HorasPracticasSemanal" />
+          <ScalarProperty Name="HorasTeoricasSemanal" ColumnName="HorasTeoricasSemanal" />
+          <ScalarProperty Name="Creditos" ColumnName="Creditos" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="IdDireccionArea" ColumnName="IdDireccionArea" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Oferta">
+      <EntityTypeMapping TypeName="SAADSTJModel.Oferta">
+        <MappingFragment StoreEntitySet="Oferta">
+          <ScalarProperty Name="IdMoodleCategoria" ColumnName="IdMoodleCategoria" />
+          <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+          <ScalarProperty Name="NroOrden" ColumnName="NroOrden" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdEstadoOferta" ColumnName="IdEstadoOferta" />
+          <ScalarProperty Name="IdSistemaEnsenanza" ColumnName="IdSistemaEnsenanza" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdGrupoAcademico" ColumnName="IdGrupoAcademico" />
+          <ScalarProperty Name="NroOfertaPeriodo" ColumnName="NroOfertaPeriodo" />
+          <ScalarProperty Name="NumeroPeriodo" ColumnName="NumeroPeriodo" />
+          <ScalarProperty Name="IdGestion" ColumnName="IdGestion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfertaSistemaEstudio">
+      <EntityTypeMapping TypeName="SAADSTJModel.OfertaSistemaEstudio">
+        <MappingFragment StoreEntitySet="OfertaSistemaEstudio">
+          <ScalarProperty Name="FechaExamenParcial" ColumnName="FechaExamenParcial" />
+          <ScalarProperty Name="FechaLimiteInscripcion" ColumnName="FechaLimiteInscripcion" />
+          <ScalarProperty Name="FechaLimitePago" ColumnName="FechaLimitePago" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="IdSistemaEstudio" ColumnName="IdSistemaEstudio" />
+          <ScalarProperty Name="IdOferta" ColumnName="IdOferta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Turno">
+      <EntityTypeMapping TypeName="SAADSTJModel.Turno">
+        <MappingFragment StoreEntitySet="Turno">
+          <ScalarProperty Name="DescripcionHorario" ColumnName="DescripcionHorario" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aula">
+      <EntityTypeMapping TypeName="SAADSTJModel.Aula">
+        <MappingFragment StoreEntitySet="Aula">
+          <ScalarProperty Name="CapacidadMaxima" ColumnName="CapacidadMaxima" />
+          <ScalarProperty Name="CapacidadAlumno" ColumnName="CapacidadAlumno" />
+          <ScalarProperty Name="IdTipoAula" ColumnName="IdTipoAula" />
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HorarioGrupo">
+      <EntityTypeMapping TypeName="SAADSTJModel.HorarioGrupo">
+        <MappingFragment StoreEntitySet="HorarioGrupo">
+          <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+          <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+          <ScalarProperty Name="IdDia" ColumnName="IdDia" />
+          <ScalarProperty Name="IdAula" ColumnName="IdAula" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="IdGrupoAperturado" ColumnName="IdGrupoAperturado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComprobanteRegistro">
+      <EntityTypeMapping TypeName="SAADSTJModel.ComprobanteRegistro">
+        <MappingFragment StoreEntitySet="ComprobanteRegistro">
+          <ScalarProperty Name="IdMotivoRegistroEspecial" ColumnName="IdMotivoRegistroEspecial" />
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdInscripcionCarrera" ColumnName="IdInscripcionCarrera" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegistroDeMateria">
+      <EntityTypeMapping TypeName="SAADSTJModel.RegistroDeMateria">
+        <MappingFragment StoreEntitySet="RegistroDeMateria">
+          <ScalarProperty Name="IdSolicitudRegistroEspecial" ColumnName="IdSolicitudRegistroEspecial" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdNivelDominioCompetencia" ColumnName="IdNivelDominioCompetencia" />
+          <ScalarProperty Name="IdValidezDetalleRecibo" ColumnName="IdValidezDetalleRecibo" />
+          <ScalarProperty Name="IdPlanEstudio" ColumnName="IdPlanEstudio" />
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+          <ScalarProperty Name="IdBeca" ColumnName="IdBeca" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+          <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />
+          <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
+          <ScalarProperty Name="ItemRecibo" ColumnName="ItemRecibo" />
+          <ScalarProperty Name="IdComprobanteRegistro" ColumnName="IdComprobanteRegistro" />
+          <ScalarProperty Name="IdEstadoMateriaRegistrada" ColumnName="IdEstadoMateriaRegistrada" />
+          <ScalarProperty Name="IdGrupoAperturado" ColumnName="IdGrupoAperturado" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProrrogasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EstadoProrroga">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prorroga">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="fechaInicio" Type="date" Nullable="false" />
+          <Property Name="fechaFin" Type="date" Nullable="false" />
+          <Property Name="fechaExtension" Type="date" />
+          <Property Name="idEstudiante" Type="int" Nullable="false" />
+          <Property Name="idCarrera" Type="int" Nullable="false" />
+          <Property Name="idGrupo" Type="int" Nullable="false" />
+          <Property Name="idModulo" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idTipoProrroga" Type="int" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoProrroga">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="200" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="aPaterno" Type="nvarchar" MaxLength="35" />
+          <Property Name="aMaterno" Type="nvarchar" MaxLength="35" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="contraseña" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="idRol" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Prorroga__idEsta__6383C8BA">
+          <End Role="EstadoProrroga" Type="Self.EstadoProrroga" Multiplicity="1" />
+          <End Role="Prorroga" Type="Self.Prorroga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoProrroga">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prorroga">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prorroga__idTipo__628FA481">
+          <End Role="TipoProrroga" Type="Self.TipoProrroga" Multiplicity="1" />
+          <End Role="Prorroga" Type="Self.Prorroga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProrroga">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prorroga">
+              <PropertyRef Name="idTipoProrroga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prorroga__idUsua__619B8048">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Prorroga" Type="Self.Prorroga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prorroga">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__idRol__3D5E1FD2">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProrrogasModelStoreContainer">
+          <EntitySet Name="EstadoProrroga" EntityType="Self.EstadoProrroga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prorroga" EntityType="Self.Prorroga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoProrroga" EntityType="Self.TipoProrroga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Prorroga__idEsta__6383C8BA" Association="Self.FK__Prorroga__idEsta__6383C8BA">
+            <End Role="EstadoProrroga" EntitySet="EstadoProrroga" />
+            <End Role="Prorroga" EntitySet="Prorroga" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prorroga__idTipo__628FA481" Association="Self.FK__Prorroga__idTipo__628FA481">
+            <End Role="TipoProrroga" EntitySet="TipoProrroga" />
+            <End Role="Prorroga" EntitySet="Prorroga" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prorroga__idUsua__619B8048" Association="Self.FK__Prorroga__idUsua__619B8048">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Prorroga" EntitySet="Prorroga" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__idRol__3D5E1FD2" Association="Self.FK__Usuario__idRol__3D5E1FD2">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProrrogasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EstadoProrroga">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Prorroga" Relationship="Self.FK__Prorroga__idEsta__3D5E1FD2" FromRole="EstadoProrroga" ToRole="Prorroga" />
+        </EntityType>
+        <EntityType Name="Prorroga">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idEstudiante" Type="Int32" Nullable="false" />
+          <Property Name="idCarrera" Type="Int32" Nullable="false" />
+          <Property Name="idGrupo" Type="Int32" Nullable="false" />
+          <Property Name="idModulo" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idTipoProrroga" Type="Int32" Nullable="false" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoProrroga" Relationship="Self.FK__Prorroga__idEsta__3D5E1FD2" FromRole="Prorroga" ToRole="EstadoProrroga" />
+          <NavigationProperty Name="TipoProrroga" Relationship="Self.FK__Prorroga__idTipo__3E52440B" FromRole="Prorroga" ToRole="TipoProrroga" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Prorroga__idUsua__3F466844" FromRole="Prorroga" ToRole="Usuario" />
+          <Property Name="fechaExtension" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="TipoProrroga">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Prorroga" Relationship="Self.FK__Prorroga__idTipo__3E52440B" FromRole="TipoProrroga" ToRole="Prorroga" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="aPaterno" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="aMaterno" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="usuario1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Prorroga" Relationship="Self.FK__Prorroga__idUsua__3F466844" FromRole="Usuario" ToRole="Prorroga" />
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="ProrrogasModel.FK__Usuario__idRol__3D5E1FD2" FromRole="Usuario" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK__Prorroga__idEsta__3D5E1FD2">
+          <End Role="EstadoProrroga" Type="Self.EstadoProrroga" Multiplicity="1" />
+          <End Role="Prorroga" Type="Self.Prorroga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoProrroga">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prorroga">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prorroga__idTipo__3E52440B">
+          <End Role="TipoProrroga" Type="Self.TipoProrroga" Multiplicity="1" />
+          <End Role="Prorroga" Type="Self.Prorroga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProrroga">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prorroga">
+              <PropertyRef Name="idTipoProrroga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prorroga__idUsua__3F466844">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Prorroga" Type="Self.Prorroga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prorroga">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProrrogasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EstadoProrroga" EntityType="Self.EstadoProrroga" />
+          <EntitySet Name="Prorroga" EntityType="Self.Prorroga" />
+          <EntitySet Name="TipoProrroga" EntityType="Self.TipoProrroga" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Prorroga__idEsta__3D5E1FD2" Association="Self.FK__Prorroga__idEsta__3D5E1FD2">
+            <End Role="EstadoProrroga" EntitySet="EstadoProrroga" />
+            <End Role="Prorroga" EntitySet="Prorroga" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prorroga__idTipo__3E52440B" Association="Self.FK__Prorroga__idTipo__3E52440B">
+            <End Role="TipoProrroga" EntitySet="TipoProrroga" />
+            <End Role="Prorroga" EntitySet="Prorroga" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prorroga__idUsua__3F466844" Association="Self.FK__Prorroga__idUsua__3F466844">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Prorroga" EntitySet="Prorroga" />
+          </AssociationSet>
+          <EntitySet Name="Rol" EntityType="ProrrogasModel.Rol" />
+          <AssociationSet Name="FK__Usuario__idRol__3D5E1FD2" Association="ProrrogasModel.FK__Usuario__idRol__3D5E1FD2">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="ProrrogasModel.FK__Usuario__idRol__3D5E1FD2" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__Usuario__idRol__3D5E1FD2">
+          <End Type="ProrrogasModel.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="ProrrogasModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProrrogasModelStoreContainer" CdmEntityContainer="ProrrogasEntities">
+          <EntitySetMapping Name="EstadoProrroga">
+            <EntityTypeMapping TypeName="ProrrogasModel.EstadoProrroga">
+              <MappingFragment StoreEntitySet="EstadoProrroga">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prorroga">
+            <EntityTypeMapping TypeName="ProrrogasModel.Prorroga">
+              <MappingFragment StoreEntitySet="Prorroga">
+                <ScalarProperty Name="fechaExtension" ColumnName="fechaExtension" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="idEstudiante" ColumnName="idEstudiante" />
+                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
+                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+                <ScalarProperty Name="idModulo" ColumnName="idModulo" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idTipoProrroga" ColumnName="idTipoProrroga" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoProrroga">
+            <EntityTypeMapping TypeName="ProrrogasModel.TipoProrroga">
+              <MappingFragment StoreEntitySet="TipoProrroga">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ProrrogasModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="aPaterno" ColumnName="aPaterno" />
+                <ScalarProperty Name="aMaterno" ColumnName="aMaterno" />
+                <ScalarProperty Name="usuario1" ColumnName="usuario" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="ProrrogasModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

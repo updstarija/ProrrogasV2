@@ -1,0 +1,68 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prórrogas</title>
+    <meta name="author" content="Alejandro Daniel Echenique Romero" />
+    <meta name="copyright" content="Universidad Privada Domingo Savio Sede Tarija" />
+    <link rel="icon" type="image/png" href="~/Content/img/isologo-color-upds_800x800i.png" />
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link href="~/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1A5276" />
+</head>
+<body>
+    <img class="wave" src="~/Content/img/wave.png" />
+    <div class="container">
+        <div class="img">
+            <img src="~/Content/img/bg.svg" />
+        </div>
+        <div class="login-content">
+            <form method="post">
+                <img src="~/Content/img/logo 3d.png" />
+                <h2 class="title">BIENVENIDOS</h2>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>USUARIO</h5>
+                        <input type="text" class="input" name="inputUser">
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>CONTRASEÑA</h5>
+                        <input type="password" class="input" name="inputPassword">
+                    </div>
+                </div>
+                <input type="submit" class="btn" value="Iniciar Sesión" (click)="login()">
+            </form>
+        </div>
+    </div>
+    <script src="~/Content/js/login.js"></script>
+    <script src="~/cute-alert.js"></script>
+    <script>
+        if (@ViewBag.UsuarioInvalido == 1) {
+            function Toast(tipo, msj) {
+                cuteToast({
+                    type: tipo,
+                    message: msj,
+                    timer: 4000
+                });
+            }
+            Msj = "Usuario invalido";
+            Toast("error", Msj);
+        }
+    </script>
+</body>
+</html>

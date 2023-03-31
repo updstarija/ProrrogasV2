@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProrrogasModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EstadoProrroga">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Prorroga" Relationship="Self.FK__Prorroga__idEsta__3D5E1FD2" FromRole="EstadoProrroga" ToRole="Prorroga" />
+  </EntityType>
+  <EntityType Name="Prorroga">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="idEstudiante" Type="Int32" Nullable="false" />
+    <Property Name="idCarrera" Type="Int32" Nullable="false" />
+    <Property Name="idGrupo" Type="Int32" Nullable="false" />
+    <Property Name="idModulo" Type="Int32" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="idTipoProrroga" Type="Int32" Nullable="false" />
+    <Property Name="idEstado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EstadoProrroga" Relationship="Self.FK__Prorroga__idEsta__3D5E1FD2" FromRole="Prorroga" ToRole="EstadoProrroga" />
+    <NavigationProperty Name="TipoProrroga" Relationship="Self.FK__Prorroga__idTipo__3E52440B" FromRole="Prorroga" ToRole="TipoProrroga" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Prorroga__idUsua__3F466844" FromRole="Prorroga" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="TipoProrroga">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Prorroga" Relationship="Self.FK__Prorroga__idTipo__3E52440B" FromRole="TipoProrroga" ToRole="Prorroga" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="aPaterno" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+    <Property Name="aMaterno" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+    <Property Name="usuario1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contraseña" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Prorroga" Relationship="Self.FK__Prorroga__idUsua__3F466844" FromRole="Usuario" ToRole="Prorroga" />
+  </EntityType>
+  <Association Name="FK__Prorroga__idEsta__3D5E1FD2">
+    <End Role="EstadoProrroga" Type="Self.EstadoProrroga" Multiplicity="1" />
+    <End Role="Prorroga" Type="Self.Prorroga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoProrroga">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prorroga">
+        <PropertyRef Name="idEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prorroga__idTipo__3E52440B">
+    <End Role="TipoProrroga" Type="Self.TipoProrroga" Multiplicity="1" />
+    <End Role="Prorroga" Type="Self.Prorroga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoProrroga">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prorroga">
+        <PropertyRef Name="idTipoProrroga" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prorroga__idUsua__3F466844">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Prorroga" Type="Self.Prorroga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prorroga">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProrrogasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EstadoProrroga" EntityType="Self.EstadoProrroga" />
+    <EntitySet Name="Prorroga" EntityType="Self.Prorroga" />
+    <EntitySet Name="TipoProrroga" EntityType="Self.TipoProrroga" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK__Prorroga__idEsta__3D5E1FD2" Association="Self.FK__Prorroga__idEsta__3D5E1FD2">
+      <End Role="EstadoProrroga" EntitySet="EstadoProrroga" />
+      <End Role="Prorroga" EntitySet="Prorroga" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prorroga__idTipo__3E52440B" Association="Self.FK__Prorroga__idTipo__3E52440B">
+      <End Role="TipoProrroga" EntitySet="TipoProrroga" />
+      <End Role="Prorroga" EntitySet="Prorroga" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prorroga__idUsua__3F466844" Association="Self.FK__Prorroga__idUsua__3F466844">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Prorroga" EntitySet="Prorroga" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
